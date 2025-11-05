@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
 import { useShotsyColors } from '@/hooks/useShotsyColors';
 import { useTheme } from '@/lib/theme-context';
-import { Ionicons } from '@expo/vector-icons';
 
 interface AlreadyUsingGLP1ScreenProps {
   onNext: (data: { alreadyUsing: boolean }) => void;
@@ -21,104 +20,114 @@ export function AlreadyUsingGLP1Screen({ onNext, onBack }: AlreadyUsingGLP1Scree
     }
   };
 
+  const renderOption = (value: boolean, title: string, description: string) => {
+    const isSelected = selected === value;
+
+    return (
+      <TouchableOpacity
+        key={title}
+        activeOpacity={0.9}
+        style={[
+          styles.option,
+          {
+            backgroundColor: colors.card,
+            borderColor: isSelected ? currentAccent : colors.border,
+          },
+        ]}
+        onPress={() => setSelected(value)}
+      >
+        <View style={styles.optionInner}>
+          <View
+            style={[
+              styles.radioOuter,
+              { borderColor: isSelected ? currentAccent : colors.textMuted },
+            ]}
+          >
+            {isSelected && <View style={[styles.radioInner, { backgroundColor: currentAccent }]} />}
+          </View>
+          <View style={styles.optionCopy}>
+            <Text style={[styles.optionTitle, { color: colors.text }]}>{title}</Text>
+            <Text style={[styles.optionDescription, { color: colors.textSecondary }]}>
+              {description}
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <OnboardingScreenBase
       title="Você já está tomando algum medicamento com GLP-1?"
-      subtitle="Isso nos ajudará a personalizar sua experiência"
+      subtitle="Isso nos ajudará a personalizar sua experiência."
       onNext={handleNext}
       onBack={onBack}
       disableNext={selected === null}
+      contentContainerStyle={styles.screenContent}
     >
       <View style={styles.content}>
-        <TouchableOpacity
-          style={[
-            styles.option,
-            {
-              backgroundColor: colors.card,
-              borderColor: selected === true ? currentAccent : colors.border,
-              borderWidth: selected === true ? 2 : 1,
-            },
-          ]}
-          onPress={() => setSelected(true)}
-        >
-          <View style={styles.optionContent}>
-            <Text style={styles.emoji}>💉</Text>
-            <View style={styles.optionText}>
-              <Text style={[styles.optionTitle, { color: colors.text }]}>
-                Já estou tomando GLP-1
-              </Text>
-              <Text style={[styles.optionDescription, { color: colors.textSecondary }]}>
-                Já comecei meu tratamento e quero acompanhar meu progresso
-              </Text>
-            </View>
-          </View>
-          {selected === true && (
-            <Ionicons name="checkmark-circle" size={24} color={currentAccent} />
-          )}
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[
-            styles.option,
-            {
-              backgroundColor: colors.card,
-              borderColor: selected === false ? currentAccent : colors.border,
-              borderWidth: selected === false ? 2 : 1,
-            },
-          ]}
-          onPress={() => setSelected(false)}
-        >
-          <View style={styles.optionContent}>
-            <Text style={styles.emoji}>📝</Text>
-            <View style={styles.optionText}>
-              <Text style={[styles.optionTitle, { color: colors.text }]}>
-                Eu ainda não comecei a usar GLP-1
-              </Text>
-              <Text style={[styles.optionDescription, { color: colors.textSecondary }]}>
-                Vou começar em breve e quero me preparar
-              </Text>
-            </View>
-          </View>
-          {selected === false && (
-            <Ionicons name="checkmark-circle" size={24} color={currentAccent} />
-          )}
-        </TouchableOpacity>
+        {renderOption(
+          true,
+          'Já estou tomando GLP-1',
+          'Já comecei meu tratamento e quero acompanhar meu progresso.',
+        )}
+        {renderOption(
+          false,
+          'Ainda não comecei a usar GLP-1',
+          'Quero me preparar para iniciar o tratamento com confiança.',
+        )}
       </View>
     </OnboardingScreenBase>
   );
 }
 
 const styles = StyleSheet.create({
+  screenContent: {
+    gap: 20,
+  },
   content: {
-    gap: 16,
+    gap: 12,
   },
   option: {
-    borderRadius: 12,  // Mudança: 16 → 12px (consistência design system)
-    padding: 20,
-    minHeight: 100,  // Garantir altura adequada para opções com emoji + texto
+    borderRadius: 14,
+    paddingHorizontal: 18,
+    paddingVertical: 16,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 2,
+  },
+  optionInner: {
     flexDirection: 'row',
+    gap: 14,
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
-  optionContent: {
-    flex: 1,
-    flexDirection: 'row',
+  radioOuter: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 2,
     alignItems: 'center',
-    gap: 16,
+    justifyContent: 'center',
   },
-  emoji: {
-    fontSize: 40,
+  radioInner: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
   },
-  optionText: {
+  optionCopy: {
     flex: 1,
+    gap: 2,
   },
   optionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
-    marginBottom: 4,
   },
   optionDescription: {
-    fontSize: 14,
+    fontSize: 13,
     lineHeight: 20,
   },
 });
+

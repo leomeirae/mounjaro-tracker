@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
 import { useShotsyColors } from '@/hooks/useShotsyColors';
 import { useTheme } from '@/lib/theme-context';
 import { ShotsyCard } from '@/components/ui/shotsy-card';
-import { VictoryLine, VictoryChart, VictoryAxis, VictoryArea } from 'victory';
+import Svg, { Path, Line as SvgLine, Text as SvgText, Circle } from 'react-native-svg';
+import { buildLineAndAreaGeometry } from './chartUtils';
 
 interface FluctuationsEducationScreenProps {
   onNext: () => void;
@@ -26,6 +27,37 @@ export function FluctuationsEducationScreen({ onNext, onBack }: FluctuationsEduc
   const colors = useShotsyColors();
   const { currentAccent } = useTheme();
 
+  const chartWidth = useMemo(() => Dimensions.get('window').width - 80, []);
+  const chartHeight = 180;
+  const padding = useMemo(() => ({ top: 16, right: 24, bottom: 36, left: 60 }), []);
+  const yTicks = [78, 79, 80, 81, 82];
+  const xTicks = [1, 2, 3, 4, 5, 6, 7];
+
+  const geometry = useMemo(
+    () =>
+      buildLineAndAreaGeometry(fluctuationData, {
+        width: chartWidth,
+        height: chartHeight,
+        padding,
+        xKey: 'day',
+        yKey: 'weight',
+        xDomain: [1, 7],
+        yDomain: [78, 82],
+      }),
+    [chartWidth, padding],
+  );
+
+  const safeZonePath = useMemo(() => {
+    const firstDay = 1;
+    const lastDay = 7;
+    const xStart = geometry.xScale(firstDay);
+    const xEnd = geometry.xScale(lastDay);
+    const upperY = geometry.yScale(82);
+    const lowerY = geometry.yScale(78);
+
+    return `M${xStart} ${upperY} L${xEnd} ${upperY} L${xEnd} ${lowerY} L${xStart} ${lowerY} Z`;
+  }, [geometry]);
+
   return (
     <OnboardingScreenBase
       title="É normal ter flutuações"
@@ -39,57 +71,95 @@ export function FluctuationsEducationScreen({ onNext, onBack }: FluctuationsEduc
           <Text style={[styles.graphTitle, { color: colors.text }]}>
             Flutuações típicas de peso
           </Text>
-          
-          <VictoryChart
-            height={180}
-            width={Dimensions.get('window').width - 80}
-            padding={{ top: 20, bottom: 30, left: 50, right: 20 }}
-          >
-            {/* Área sombreada (±2kg zona normal) */}
-            <VictoryArea
-              data={[
-                { day: 1, y0: 78, y: 82 },
-                { day: 7, y0: 78, y: 82 },
-              ]}
-              style={{
-                data: { fill: colors.textMuted, opacity: 0.1 }
-              }}
+
+          <Svg height={chartHeight} width={chartWidth}>
+            {/* Grid lines */}
+            {yTicks.map((value) => (
+              <SvgLine
+                key={`y-${value}`}
+                x1={padding.left}
+                x2={chartWidth - padding.right}
+                y1={geometry.yScale(value)}
+                y2={geometry.yScale(value)}
+                stroke={colors.border}
+                strokeDasharray="2 2"
+                strokeOpacity={0.5}
+              />
+            ))}
+
+            {/* Safe zone */}
+            <Path d={safeZonePath} fill={colors.textMuted} opacity={0.1} />
+
+            {/* Axes */}
+            <SvgLine
+              x1={padding.left}
+              x2={padding.left}
+              y1={padding.top}
+              y2={geometry.baselineY}
+              stroke={colors.border}
             />
-            
-            {/* Linha de peso com variações */}
-            <VictoryLine
-              data={fluctuationData}
-              x="day"
-              y="weight"
-              style={{
-                data: {
-                  stroke: currentAccent,
-                  strokeWidth: 3,
-                }
-              }}
-              interpolation="natural"
+            <SvgLine
+              x1={padding.left}
+              x2={chartWidth - padding.right}
+              y1={geometry.baselineY}
+              y2={geometry.baselineY}
+              stroke={colors.border}
             />
-            
-            {/* Eixos */}
-            <VictoryAxis
-              dependentAxis
-              tickFormat={(t) => `${t}kg`}
-              style={{
-                tickLabels: { fontSize: 10, fill: colors.textMuted },
-                grid: { stroke: colors.border, strokeDasharray: '2,2', strokeOpacity: 0.5 },
-                axis: { stroke: colors.border },
-              }}
-            />
-            <VictoryAxis
-              label="Dias"
-              style={{
-                axisLabel: { fontSize: 12, padding: 25, fill: colors.textSecondary },
-                tickLabels: { fontSize: 10, fill: colors.textMuted },
-                axis: { stroke: colors.border },
-              }}
-            />
-          </VictoryChart>
-          
+
+            {/* Weight line */}
+            <Path d={geometry.linePath} stroke={currentAccent} strokeWidth={3} fill="none" />
+
+            {/* Data points */}
+            {fluctuationData.map((point) => (
+              <Circle
+                key={point.day}
+                cx={geometry.xScale(point.day)}
+                cy={geometry.yScale(point.weight)}
+                r={3}
+                fill={colors.card}
+                stroke={currentAccent}
+                strokeWidth={1.5}
+              />
+            ))}
+
+            {/* Tick labels */}
+            {yTicks.map((value) => (
+              <SvgText
+                key={`y-label-${value}`}
+                x={padding.left - 10}
+                y={geometry.yScale(value) + 4}
+                fill={colors.textMuted}
+                fontSize={10}
+                textAnchor="end"
+              >
+                {`${value}kg`}
+              </SvgText>
+            ))}
+            {xTicks.map((value) => (
+              <SvgText
+                key={`x-label-${value}`}
+                x={geometry.xScale(value)}
+                y={geometry.baselineY + 18}
+                fill={colors.textMuted}
+                fontSize={10}
+                textAnchor="middle"
+              >
+                {value}
+              </SvgText>
+            ))}
+
+            {/* Axis label */}
+            <SvgText
+              x={(padding.left + chartWidth - padding.right) / 2}
+              y={geometry.baselineY + 34}
+              fill={colors.textSecondary}
+              fontSize={12}
+              textAnchor="middle"
+            >
+              Dias
+            </SvgText>
+          </Svg>
+
           <Text style={[styles.graphCaption, { color: colors.textMuted }]}>
             Variações de até 2kg são completamente normais
           </Text>

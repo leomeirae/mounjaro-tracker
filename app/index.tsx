@@ -39,8 +39,9 @@ export default function IndexScreen() {
     }
 
     // Se passou do tempo máximo de espera e ainda não tem user, assumir que precisa de onboarding
+    // (Fallback de segurança caso a lógica de novo usuário não funcione)
     if (!user && waitTime >= maxWaitTime) {
-      console.log('⚠️ User data not loaded after timeout, redirecting to onboarding');
+      console.log('⚠️ User data not loaded after timeout (fallback), redirecting to onboarding');
       hasRedirectedRef.current = true;
       router.replace('/(auth)/onboarding-flow');
       setTimeout(() => {
@@ -52,11 +53,23 @@ export default function IndexScreen() {
     // Se ainda está carregando, aguardar
     if (userLoading) return;
 
-    // Se user ainda é null após carregar, aguardar um pouco mais
-    // (o useUserSync pode estar criando o usuário)
-    if (!user) {
-      console.log('⏳ User still loading, waiting...');
-      return;
+    // NOVO: Se usuário autenticado mas não existe no Supabase ainda,
+    // redirecionar para onboarding imediatamente (novo usuário sempre precisa de onboarding)
+    if (!user && isSignedIn && !userLoading) {
+      console.log('🆕 New user detected, redirecting to onboarding immediately');
+      hasRedirectedRef.current = true;
+      
+      // Pequeno delay para dar tempo do useUserSync criar o usuário
+      const newUserTimer = setTimeout(() => {
+        router.replace('/(auth)/onboarding-flow');
+        setTimeout(() => {
+          hasRedirectedRef.current = false;
+        }, 500);
+      }, 500);
+      
+      return () => {
+        clearTimeout(newUserTimer);
+      };
     }
 
     // Marcar como redirecionado antes de redirecionar
@@ -67,10 +80,10 @@ export default function IndexScreen() {
       if (isSignedIn && user) {
         // Se o onboarding não foi completado, ir para onboarding
         if (!user.onboarding_completed) {
-          console.log('📋 Redirecting to onboarding flow');
+          console.log('📋 User exists but onboarding not completed, redirecting to onboarding flow');
           router.replace('/(auth)/onboarding-flow');
         } else {
-          console.log('✅ Redirecting to dashboard');
+          console.log('✅ User exists and onboarding completed, redirecting to dashboard');
           router.replace('/(tabs)');
         }
         // Resetar após redirecionar
@@ -78,6 +91,7 @@ export default function IndexScreen() {
           hasRedirectedRef.current = false;
         }, 500);
       } else if (!isSignedIn) {
+        console.log('🚪 User not signed in, redirecting to welcome');
         router.replace('/(auth)/welcome');
         setTimeout(() => {
           hasRedirectedRef.current = false;

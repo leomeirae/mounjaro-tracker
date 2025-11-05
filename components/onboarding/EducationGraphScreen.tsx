@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
 import { useShotsyColors } from '@/hooks/useShotsyColors';
 import { useTheme } from '@/lib/theme-context';
 import { ShotsyCard } from '@/components/ui/shotsy-card';
-import { 
-  VictoryArea, 
-  VictoryChart, 
-  VictoryAxis, 
-  VictoryScatter 
-} from 'victory';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Path,
+  Line as SvgLine,
+  Text as SvgText,
+  Circle,
+} from 'react-native-svg';
+import { buildLineAndAreaGeometry } from './chartUtils';
 
 interface EducationGraphScreenProps {
   onNext: () => void;
@@ -33,6 +37,32 @@ export function EducationGraphScreen({ onNext, onBack }: EducationGraphScreenPro
   const colors = useShotsyColors();
   const { currentAccent } = useTheme();
 
+  const chartWidth = useMemo(() => Dimensions.get('window').width - 64, []);
+  const chartHeight = 220;
+  const padding = useMemo(() => ({ top: 24, right: 24, bottom: 44, left: 60 }), []);
+  const yTicks = [0, 0.5, 1.0, 1.5];
+  const xTicks = [0, 2, 4, 6, 7];
+
+  const geometry = useMemo(
+    () =>
+      buildLineAndAreaGeometry(pharmacokineticData, {
+        width: chartWidth,
+        height: chartHeight,
+        padding,
+        xKey: 'day',
+        yKey: 'level',
+        xDomain: [0, 7],
+        yDomain: [0, 1.5],
+      }),
+    [chartWidth, padding],
+  );
+
+  const peakPoint = { day: 4, level: 1.2 };
+  const peakX = geometry.xScale(peakPoint.day);
+  const peakY = geometry.yScale(peakPoint.level);
+  const yAxisLabelCenter =
+    padding.top + (geometry.baselineY - padding.top) / 2;
+
   return (
     <OnboardingScreenBase
       title="Entenda seus níveis estimados"
@@ -43,81 +73,102 @@ export function EducationGraphScreen({ onNext, onBack }: EducationGraphScreenPro
     >
       <View style={styles.content}>
         <ShotsyCard variant="elevated" style={styles.graphCard}>
-          <VictoryChart
-            height={220}
-            width={Dimensions.get('window').width - 64}
-            padding={{ top: 20, bottom: 40, left: 50, right: 20 }}
-          >
-            {/* Eixo Y - Níveis de medicamento */}
-            <VictoryAxis
-              dependentAxis
-              label="Nível (mg)"
-              style={{
-                axisLabel: { 
-                  fontSize: 12, 
-                  padding: 35,
-                  fill: colors.textSecondary,
-                },
-                tickLabels: { 
-                  fontSize: 10,
-                  fill: colors.textMuted,
-                },
-                grid: { 
-                  stroke: colors.border, 
-                  strokeDasharray: '4,4',
-                  strokeOpacity: 0.5,
-                },
-                axis: { stroke: colors.border },
-              }}
-              tickValues={[0, 0.5, 1.0, 1.5]}
+          <Svg height={chartHeight} width={chartWidth}>
+            <Defs>
+              <LinearGradient id="educationGradient" x1="0" y1="0" x2="0" y2="1">
+                <Stop offset="0%" stopColor={currentAccent} stopOpacity={0.4} />
+                <Stop offset="100%" stopColor={currentAccent} stopOpacity={0.05} />
+              </LinearGradient>
+            </Defs>
+
+            {/* Grid lines */}
+            {yTicks.map((value) => {
+              const y = geometry.yScale(value);
+              return (
+                <SvgLine
+                  key={`y-${value}`}
+                  x1={padding.left}
+                  x2={chartWidth - padding.right}
+                  y1={y}
+                  y2={y}
+                  stroke={colors.border}
+                  strokeDasharray="4 4"
+                  strokeOpacity={0.5}
+                />
+              );
+            })}
+
+            {/* Axes */}
+            <SvgLine
+              x1={padding.left}
+              x2={padding.left}
+              y1={padding.top}
+              y2={geometry.baselineY}
+              stroke={colors.border}
             />
-            
-            {/* Eixo X - Dias */}
-            <VictoryAxis
-              label="Dias"
-              style={{
-                axisLabel: { 
-                  fontSize: 12, 
-                  padding: 30,
-                  fill: colors.textSecondary,
-                },
-                tickLabels: { 
-                  fontSize: 10,
-                  fill: colors.textMuted,
-                },
-                axis: { stroke: colors.border },
-              }}
-              tickValues={[0, 2, 4, 6, 7]}
+            <SvgLine
+              x1={padding.left}
+              x2={chartWidth - padding.right}
+              y1={geometry.baselineY}
+              y2={geometry.baselineY}
+              stroke={colors.border}
             />
-            
-            {/* Área preenchida - curva farmacológica */}
-            <VictoryArea
-              data={pharmacokineticData}
-              x="day"
-              y="level"
-              style={{
-                data: {
-                  fill: currentAccent,
-                  fillOpacity: 0.3,
-                  stroke: currentAccent,
-                  strokeWidth: 2,
-                }
-              }}
-              interpolation="natural" // Curva suave
-            />
-            
-            {/* Ponto do pico (Tmax) */}
-            <VictoryScatter
-              data={[{ day: 4, level: 1.2 }]}
-              x="day"
-              y="level"
-              size={6}
-              style={{
-                data: { fill: currentAccent }
-              }}
-            />
-          </VictoryChart>
-          
+
+            {/* Area and line */}
+            <Path d={geometry.areaPath} fill="url(#educationGradient)" />
+            <Path d={geometry.linePath} stroke={currentAccent} strokeWidth={2} fill="none" />
+
+            {/* Peak marker */}
+            <Circle cx={peakX} cy={peakY} r={6} fill={currentAccent} />
+
+            {/* Axis labels */}
+            <SvgText
+              x={padding.left - 38}
+              y={yAxisLabelCenter}
+              fill={colors.textSecondary}
+              fontSize={12}
+              textAnchor="middle"
+              transform={`rotate(-90 ${padding.left - 38} ${yAxisLabelCenter})`}
+            >
+              Nível (mg)
+            </SvgText>
+            <SvgText
+              x={(padding.left + chartWidth - padding.right) / 2}
+              y={geometry.baselineY + 30}
+              fill={colors.textSecondary}
+              fontSize={12}
+              textAnchor="middle"
+            >
+              Dias
+            </SvgText>
+
+            {/* Tick labels */}
+            {yTicks.map((value) => (
+              <SvgText
+                key={`y-label-${value}`}
+                x={padding.left - 10}
+                y={geometry.yScale(value) + 4}
+                fill={colors.textMuted}
+                fontSize={10}
+                textAnchor="end"
+              >
+                {value.toFixed(1)}
+              </SvgText>
+            ))}
+            {xTicks.map((value) => (
+              <SvgText
+                key={`x-label-${value}`}
+                x={geometry.xScale(value)}
+                y={geometry.baselineY + 18}
+                fill={colors.textMuted}
+                fontSize={10}
+                textAnchor="middle"
+              >
+                {value}
+              </SvgText>
+            ))}
+          </Svg>
+
           {/* Label do pico */}
           <Text style={[styles.peakLabel, { color: currentAccent }]}>
             ← Pico: 1.2mg (dia 4)

@@ -17,105 +17,104 @@ export function CustomizationIntroScreen({ onNext, onBack }: CustomizationIntroS
   return (
     <OnboardingScreenBase
       title="Personalize tudo"
-      subtitle="Deixe o app com a sua cara escolhendo temas e cores de destaque"
+      subtitle="Deixe o app do seu jeito escolhendo temas e cores de destaque."
       onNext={onNext}
       onBack={onBack}
+      contentContainerStyle={styles.screenContent}
     >
       <View style={styles.content}>
-        <Text style={styles.emoji}>🎨</Text>
-
-        <ShotsyCard variant="elevated" style={styles.card}>
-          <View style={styles.feature}>
+        <ShotsyCard variant="elevated" style={styles.featureCard}>
+          <View style={styles.featureRow}>
             <Text style={styles.featureEmoji}>🌈</Text>
-            <View style={styles.featureText}>
-              <Text style={[styles.featureTitle, { color: colors.text }]}>
-                Temas personalizados
-              </Text>
+            <View style={styles.featureCopy}>
+              <Text style={[styles.featureTitle, { color: colors.text }]}>Temas personalizados</Text>
               <Text style={[styles.featureDescription, { color: colors.textSecondary }]}>
-                Escolha entre diversos temas: Pôr do Sol, Oceano, Floresta e muito mais
+                Explore paletas inspiradas em Pôr do Sol, Oceano, Floresta e outras atmosferas.
               </Text>
             </View>
           </View>
-        </ShotsyCard>
 
-        <ShotsyCard variant="elevated" style={styles.card}>
-          <View style={styles.feature}>
+          <View style={styles.divider} />
+
+          <View style={styles.featureRow}>
             <Text style={styles.featureEmoji}>🎯</Text>
-            <View style={styles.featureText}>
-              <Text style={[styles.featureTitle, { color: colors.text }]}>
-                Cores de destaque
-              </Text>
+            <View style={styles.featureCopy}>
+              <Text style={[styles.featureTitle, { color: colors.text }]}>Cores de destaque</Text>
               <Text style={[styles.featureDescription, { color: colors.textSecondary }]}>
-                Personalize a cor principal dos botões e elementos interativos
+                Ajuste a cor dos botões e indicadores para combinar com o seu estilo.
               </Text>
             </View>
           </View>
         </ShotsyCard>
 
-        <View style={styles.colorPreview}>
-          <Text style={[styles.colorPreviewLabel, { color: colors.textSecondary }]}>
-            Exemplo de cor de destaque:
+        <ShotsyCard style={styles.paletteCard}>
+          <Text style={[styles.paletteLabel, { color: colors.textSecondary }]}>
+            Paletas disponíveis
           </Text>
-          <View style={styles.colorRow}>
-            <View style={[styles.colorSwatch, { backgroundColor: currentAccent }]} />
-            <View style={[styles.colorSwatch, { backgroundColor: '#3B82F6' }]} />
-            <View style={[styles.colorSwatch, { backgroundColor: '#10B981' }]} />
-            <View style={[styles.colorSwatch, { backgroundColor: '#F59E0B' }]} />
-            <View style={[styles.colorSwatch, { backgroundColor: '#EF4444' }]} />
+          <View style={styles.paletteRow}>
+            {[currentAccent, '#3B82F6', '#10B981', '#F59E0B', '#EF4444'].map((color) => (
+              <View key={color} style={[styles.swatch, { backgroundColor: color }]} />
+            ))}
           </View>
-        </View>
+        </ShotsyCard>
       </View>
     </OnboardingScreenBase>
   );
 }
 
 const styles = StyleSheet.create({
+  screenContent: {
+    gap: 24,
+  },
   content: {
-    flex: 1,
-  },
-  emoji: {
-    fontSize: 80,
-    textAlign: 'center',
-    marginBottom: 32,
-  },
-  card: {
-    marginBottom: 16,
-  },
-  feature: {
-    flexDirection: 'row',
-    alignItems: 'center',
     gap: 16,
   },
-  featureEmoji: {
-    fontSize: 32,
+  featureCard: {
+    gap: 16,
   },
-  featureText: {
+  featureRow: {
+    flexDirection: 'row',
+    gap: 14,
+    alignItems: 'flex-start',
+  },
+  featureEmoji: {
+    fontSize: 28,
+    lineHeight: 32,
+  },
+  featureCopy: {
     flex: 1,
+    gap: 4,
   },
   featureTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
-    marginBottom: 4,
   },
   featureDescription: {
-    fontSize: 14,
+    fontSize: 13,
     lineHeight: 20,
   },
-  colorPreview: {
-    marginTop: 24,
+  divider: {
+    height: 1,
+    backgroundColor: 'rgba(0,0,0,0.06)',
+  },
+  paletteCard: {
     alignItems: 'center',
+    gap: 12,
   },
-  colorPreviewLabel: {
-    fontSize: 14,
-    marginBottom: 12,
+  paletteLabel: {
+    fontSize: 13,
+    textTransform: 'uppercase',
+    letterSpacing: 0.4,
+    fontWeight: '600',
   },
-  colorRow: {
+  paletteRow: {
     flexDirection: 'row',
     gap: 12,
   },
-  colorSwatch: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+  swatch: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
   },
 });
+

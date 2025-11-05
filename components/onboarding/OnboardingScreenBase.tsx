@@ -1,5 +1,14 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useShotsyColors } from '@/hooks/useShotsyColors';
 import { ShotsyButton } from '@/components/ui/shotsy-button';
@@ -15,7 +24,10 @@ interface OnboardingScreenBaseProps {
   disableNext?: boolean;
   showBackButton?: boolean;
   loading?: boolean;
-  contentContainerStyle?: any;
+  contentContainerStyle?: StyleProp<ViewStyle>;
+  headerAlign?: 'left' | 'center';
+  titleStyle?: StyleProp<TextStyle>;
+  subtitleStyle?: StyleProp<TextStyle>;
 }
 
 export function OnboardingScreenBase({
@@ -29,6 +41,9 @@ export function OnboardingScreenBase({
   showBackButton = true,
   loading = false,
   contentContainerStyle,
+  headerAlign = 'left',
+  titleStyle,
+  subtitleStyle,
 }: OnboardingScreenBaseProps) {
   const colors = useShotsyColors();
   const insets = useSafeAreaInsets();
@@ -48,19 +63,36 @@ export function OnboardingScreenBase({
         style={styles.scrollView}
         contentContainerStyle={[
           styles.scrollContent,
-          { paddingTop: insets.top + 60, paddingBottom: insets.bottom + 100 },
+          {
+            paddingTop: insets.top + 24,
+            paddingBottom: insets.bottom + 32,
+            minHeight: '100%',
+          },
           contentContainerStyle,
         ]}
         showsVerticalScrollIndicator={false}
       >
         {title && (
-          <View style={[
-            styles.header,
-            showBackButton && onBack && styles.headerWithBackButton
-          ]}>
-            <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
+          <View style={[styles.header, headerAlign === 'center' && styles.headerCenter]}>
+            <Text
+              style={[
+                styles.title,
+                { color: colors.text },
+                headerAlign === 'center' && styles.titleCenter,
+                titleStyle,
+              ]}
+            >
+              {title}
+            </Text>
             {subtitle && (
-              <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
+              <Text
+                style={[
+                  styles.subtitle,
+                  { color: colors.textSecondary },
+                  headerAlign === 'center' && styles.subtitleCenter,
+                  subtitleStyle,
+                ]}
+              >
                 {subtitle}
               </Text>
             )}
@@ -75,7 +107,7 @@ export function OnboardingScreenBase({
           style={[
             styles.footer,
             {
-              paddingBottom: insets.bottom + 20,
+              paddingBottom: insets.bottom + 16,
               backgroundColor: colors.background,
             },
           ]}
@@ -113,17 +145,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   header: {
-    marginBottom: 32,
+    marginBottom: 24,
+  },
+  headerCenter: {
+    alignItems: 'center',
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    lineHeight: 36,
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 6,
+    lineHeight: 32,
+  },
+  titleCenter: {
+    textAlign: 'center',
   },
   subtitle: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: 15,
+    lineHeight: 22,
+  },
+  subtitleCenter: {
+    textAlign: 'center',
   },
   footer: {
     position: 'absolute',

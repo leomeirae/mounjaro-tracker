@@ -54,7 +54,6 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
       onBack={onBack}
     >
       <View style={styles.content}>
-        {/* Unit Toggle - Igual ao Shotsy */}
         <View style={styles.unitToggle}>
           <TouchableOpacity
             style={[
@@ -96,12 +95,10 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
           </TouchableOpacity>
         </View>
 
-        {/* Picker Card - Igual ao Shotsy */}
         <ShotsyCard variant="elevated" style={styles.pickerCard}>
           <View style={styles.pickerContainer}>
-            {/* Top Fade */}
             <LinearGradient
-              colors={[colors.card, 'transparent']}
+              colors={[colors.background, 'transparent']}
               style={styles.fadeTop}
               pointerEvents="none"
             />
@@ -142,9 +139,8 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
               </View>
             )}
 
-            {/* Bottom Fade */}
             <LinearGradient
-              colors={['transparent', colors.card]}
+              colors={['transparent', colors.background]}
               style={styles.fadeBottom}
               pointerEvents="none"
             />
@@ -157,34 +153,31 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
 
 const styles = StyleSheet.create({
   content: {
-    gap: 24,
-    flex: 1,
+    gap: 20,
   },
   unitToggle: {
     flexDirection: 'row',
-    gap: 12,
-    paddingHorizontal: 16,
+    gap: 8,
   },
   unitButton: {
     flex: 1,
-    paddingVertical: 12,
+    paddingVertical: 10,
     borderRadius: 12,
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   unitButtonText: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '600',
   },
   pickerCard: {
     padding: 0,
     overflow: 'hidden',
-    marginHorizontal: 16,
   },
   pickerContainer: {
     position: 'relative',
-    height: 260,
+    height: 220,
     width: '100%',
   },
   fadeTop: {
@@ -192,7 +185,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    height: 80,
+    height: 60,
     zIndex: 2,
   },
   fadeBottom: {
@@ -200,26 +193,26 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 80,
+    height: 60,
     zIndex: 2,
   },
   picker: {
-    height: 260,
+    height: 220,
     width: '100%',
   },
   pickerItem: {
-    fontSize: Platform.OS === 'ios' ? 28 : 24,
+    fontSize: Platform.OS === 'ios' ? 24 : 22,
     fontWeight: '600',
-    height: 52,
+    height: 44,
     textAlign: 'center',
   },
   dualPickerRow: {
     flexDirection: 'row',
-    height: 260,
+    height: 220,
     width: '100%',
   },
   pickerHalf: {
     flex: 1,
-    height: 260,
+    height: 220,
   },
 });

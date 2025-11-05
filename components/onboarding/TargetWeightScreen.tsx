@@ -66,6 +66,7 @@ export function TargetWeightScreen({
       onNext={handleNext}
       onBack={onBack}
       disableNext={!isValid}
+      contentContainerStyle={styles.screenContent}
     >
       <View style={styles.content}>
         {/* Main Slider Card */}
@@ -185,28 +186,30 @@ export function TargetWeightScreen({
           </View>
         </ShotsyCard>
 
-        <Text style={styles.emoji}>🎯</Text>
       </View>
     </OnboardingScreenBase>
   );
 }
 
 const styles = StyleSheet.create({
-  content: {
+  screenContent: {
     gap: 24,
   },
+  content: {
+    gap: 20,
+  },
   sliderCard: {
-    padding: 24,
+    padding: 20,
     alignItems: 'center',
   },
   weightValue: {
-    fontSize: 48,
+    fontSize: 34,
     fontWeight: '700',
-    marginBottom: 24,
+    marginBottom: 16,
   },
   sliderContainer: {
     width: '100%',
-    marginBottom: 24,
+    marginBottom: 16,
   },
   slider: {
     width: '100%',
@@ -223,11 +226,11 @@ const styles = StyleSheet.create({
   },
   bmiDisplay: {
     alignItems: 'center',
-    marginBottom: 20,
-    gap: 8,
+    marginBottom: 16,
+    gap: 6,
   },
   bmiValue: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: '700',
   },
   bmiPill: {
@@ -278,8 +281,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   summaryCard: {
-    padding: 20,
-    gap: 12,
+    padding: 16,
+    gap: 10,
   },
   summaryRow: {
     flexDirection: 'row',
@@ -290,11 +293,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   summaryValue: {
-    fontSize: 18,
-    fontWeight: '700',
-  },
-  emoji: {
-    fontSize: 64,
-    textAlign: 'center',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

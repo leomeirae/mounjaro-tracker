@@ -32,15 +32,15 @@ export function ShotsyCard({ children, style, variant = 'default' }: ShotsyCardP
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 16,
-    padding: 16,
+    borderRadius: 14,
+    padding: 18,
   },
   elevated: {
-    shadowColor: '#000', // Shadow color is always black, opacity varies
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1, // Lighter shadow for both modes
-    shadowRadius: 8,
-    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
   },
   outline: {
     borderWidth: 1,

@@ -13,8 +13,7 @@ interface CurrentWeightScreenProps {
   onBack: () => void;
 }
 
-// Gerar arrays para o picker
-const generateWholeNumbers = (min: number, max: number) => 
+const generateWholeNumbers = (min: number, max: number) =>
   Array.from({ length: max - min + 1 }, (_, i) => i + min);
 
 const DECIMALS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -23,14 +22,13 @@ const UNITS = ['kg', 'lb'] as const;
 export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps) {
   const colors = useShotsyColors();
   const { currentAccent } = useTheme();
-  
-  // Estado: 3 valores separados (inteiro, decimal, unidade)
+
   const [wholeNumber, setWholeNumber] = useState(75);
   const [decimal, setDecimal] = useState(0);
   const [unit, setUnit] = useState<'kg' | 'lb'>('kg');
 
   const handleNext = () => {
-    const weight = wholeNumber + (decimal / 10);
+    const weight = wholeNumber + decimal / 10;
     onNext({ currentWeight: weight, weightUnit: unit });
   };
 
@@ -39,28 +37,24 @@ export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps
   return (
     <OnboardingScreenBase
       title="Qual é o seu peso atual?"
-      subtitle="Essa será a base para acompanhar seu progresso"
+      subtitle="Essa será a base para acompanhar seu progresso."
       onNext={handleNext}
       onBack={onBack}
       disableNext={!isValid}
+      contentContainerStyle={styles.screenContent}
     >
       <View style={styles.content}>
         <ShotsyCard variant="elevated" style={styles.pickerCard}>
-          <Text style={[styles.inputLabel, { color: colors.textSecondary }]}>
-            Peso atual
-          </Text>
+          <Text style={[styles.inputLabel, { color: colors.textSecondary }]}>Peso atual</Text>
 
-          {/* Container dos 3 pickers com fade effects */}
           <View style={styles.pickerContainer}>
-            {/* Top Fade */}
             <LinearGradient
-              colors={[colors.card, 'transparent']}
+              colors={[colors.background, 'transparent']}
               style={styles.fadeTop}
               pointerEvents="none"
             />
 
             <View style={styles.pickersRow}>
-              {/* Picker 1: Parte inteira (30-200 kg ou 66-440 lb) */}
               <View style={styles.pickerColumn}>
                 <Picker
                   selectedValue={wholeNumber}
@@ -70,16 +64,14 @@ export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps
                   }}
                   itemStyle={[styles.pickerItem, { color: colors.text }]}
                 >
-                  {generateWholeNumbers(
-                    unit === 'kg' ? 30 : 66,
-                    unit === 'kg' ? 200 : 440
-                  ).map((num) => (
-                    <Picker.Item key={num} label={`${num}`} value={num} />
-                  ))}
+                  {generateWholeNumbers(unit === 'kg' ? 30 : 66, unit === 'kg' ? 200 : 440).map(
+                    (num) => (
+                      <Picker.Item key={num} label={`${num}`} value={num} />
+                    ),
+                  )}
                 </Picker>
               </View>
 
-              {/* Picker 2: Parte decimal (.0 - .9) */}
               <View style={styles.pickerColumn}>
                 <Picker
                   selectedValue={decimal}
@@ -95,15 +87,13 @@ export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps
                 </Picker>
               </View>
 
-              {/* Picker 3: Unidade (kg/lb) */}
               <View style={styles.pickerColumn}>
                 <Picker
                   selectedValue={unit}
                   onValueChange={(value) => {
                     setUnit(value);
-                    // Ajustar wholeNumber se mudar de unidade
                     if (value === 'lb' && wholeNumber < 66) {
-                      setWholeNumber(165); // ~75kg
+                      setWholeNumber(165);
                     } else if (value === 'kg' && wholeNumber > 200) {
                       setWholeNumber(75);
                     }
@@ -118,22 +108,19 @@ export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps
               </View>
             </View>
 
-            {/* Bottom Fade */}
             <LinearGradient
-              colors={['transparent', colors.card]}
+              colors={['transparent', colors.background]}
               style={styles.fadeBottom}
               pointerEvents="none"
             />
           </View>
         </ShotsyCard>
 
-        <Text style={styles.emoji}>⚖️</Text>
-
         <ShotsyCard style={styles.tipCard}>
           <Text style={styles.tipEmoji}>💡</Text>
           <Text style={[styles.tipText, { color: colors.textSecondary }]}>
-            Para resultados mais precisos, pese-se sempre no mesmo horário,
-            de preferência pela manhã, após ir ao banheiro.
+            Para resultados mais precisos, pese-se sempre no mesmo horário, de preferência pela
+            manhã.
           </Text>
         </ShotsyCard>
       </View>
@@ -142,17 +129,19 @@ export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps
 }
 
 const styles = StyleSheet.create({
-  content: {
+  screenContent: {
     gap: 24,
   },
+  content: {
+    gap: 20,
+  },
   pickerCard: {
-    padding: 20,
+    padding: 18,
   },
   inputLabel: {
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '600',
     marginBottom: 12,
-    textAlign: 'center',
   },
   pickerContainer: {
     height: 200,
@@ -168,7 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   pickerItem: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: '600',
   },
   fadeTop: {
@@ -176,7 +165,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    height: 40,
+    height: 50,
     zIndex: 1,
   },
   fadeBottom: {
@@ -184,12 +173,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 40,
+    height: 50,
     zIndex: 1,
-  },
-  emoji: {
-    fontSize: 64,
-    textAlign: 'center',
   },
   tipCard: {
     padding: 16,
@@ -198,11 +183,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tipEmoji: {
-    fontSize: 24,
+    fontSize: 22,
   },
   tipText: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 13,
     lineHeight: 20,
   },
 });
+

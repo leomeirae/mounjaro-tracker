@@ -64,9 +64,9 @@ export function ShotsyButton({
       case 'medium':
         return 48;
       case 'large':
-        return 56;
+        return 52;
       default:
-        return 56;
+        return 52;
     }
   };
 
@@ -95,7 +95,7 @@ export function ShotsyButton({
             styles.text,
             {
               color: getTextColor(),
-              fontSize: size === 'small' ? 14 : 16,
+              fontSize: size === 'small' ? 14 : size === 'medium' ? 15 : 16,
               fontWeight: '600',
             },
             textStyle,
@@ -110,10 +110,10 @@ export function ShotsyButton({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 28,
+    borderRadius: 26,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 24,
+    paddingHorizontal: 22,
   },
   text: {
     textAlign: 'center',

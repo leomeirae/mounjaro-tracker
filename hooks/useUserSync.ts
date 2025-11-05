@@ -18,7 +18,11 @@ export function useUserSync() {
   const hasSyncedRef = useRef(false);
 
   useEffect(() => {
+    // 🔍 DEBUG: Log inicial para verificar se o hook executa
+    console.log('🔍 useUserSync effect triggered:', { isSignedIn, userId, hasUser: !!user });
+    
     if (!isSignedIn || !userId) {
+      console.log('⏸️ useUserSync: Not signed in or no userId, skipping');
       setIsLoading(false);
       return;
     }
@@ -121,10 +125,13 @@ export function useUserSync() {
               console.error('❌ Insert error:', insertError);
               console.error('❌ Error code:', insertError.code);
               console.error('❌ Error message:', insertError.message);
+              console.error('❌ Error details:', JSON.stringify(insertError, null, 2));
+              console.error('❌ User data attempted:', JSON.stringify(userData, null, 2));
               throw insertError;
             }
           } else {
             console.log('✅ User created successfully in Supabase:', newUser?.id);
+            console.log('✅ Created user data:', JSON.stringify(newUser, null, 2));
           }
         } else {
           console.log('✅ User already exists in Supabase:', existingUser.id);
