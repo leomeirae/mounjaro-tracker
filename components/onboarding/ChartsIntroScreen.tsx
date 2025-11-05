@@ -59,6 +59,8 @@ export function ChartsIntroScreen({ onNext, onBack }: ChartsIntroScreenProps) {
             />
             <VictoryArea
               data={sampleChartData}
+              x="x"
+              y="y"
               style={{
                 data: {
                   fill: currentAccent,
@@ -73,16 +75,16 @@ export function ChartsIntroScreen({ onNext, onBack }: ChartsIntroScreenProps) {
           
           <Text style={[styles.chartAnnotation, { color: colors.text }]}>
             1.16mg
-          </Text>
+              </Text>
           <Text style={[styles.chartTimestamp, { color: colors.textMuted }]}>
             28 de out. de 2025, 10
-          </Text>
+              </Text>
         </ShotsyCard>
 
         <Text style={[styles.disclaimer, { color: colors.textSecondary }]}>
           Mounjaro Tracker usa resultados de ensaios clínicos publicados pela FDA 
           para mapear os níveis estimados de medicação ao longo do tempo
-        </Text>
+              </Text>
       </View>
     </OnboardingScreenBase>
   );

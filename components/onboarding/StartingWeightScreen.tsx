@@ -57,19 +57,19 @@ export function StartingWeightScreen({ onNext, onBack, weightUnit = 'kg' }: Star
           <View style={styles.cardContent}>
             <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
               Peso Inicial
-            </Text>
-            <View style={styles.inputRow}>
-              <TextInput
+          </Text>
+          <View style={styles.inputRow}>
+            <TextInput
                 style={[styles.cardValue, { color: colors.text }]}
-                value={weight}
-                onChangeText={setWeight}
-                keyboardType="decimal-pad"
+              value={weight}
+              onChangeText={setWeight}
+              keyboardType="decimal-pad"
                 placeholder={weightUnit === 'kg' ? '104' : '229'}
-                placeholderTextColor={colors.textMuted}
-              />
+              placeholderTextColor={colors.textMuted}
+            />
               <Text style={[styles.unitSuffix, { color: colors.textSecondary }]}>
-                {weightUnit}
-              </Text>
+              {weightUnit}
+            </Text>
             </View>
           </View>
         </ShotsyCard>
@@ -93,8 +93,8 @@ export function StartingWeightScreen({ onNext, onBack, weightUnit = 'kg' }: Star
             </View>
             <View style={styles.cardAction}>
               <Ionicons name="pencil" size={20} color={colors.textMuted} />
-            </View>
-          </ShotsyCard>
+          </View>
+        </ShotsyCard>
         </TouchableOpacity>
 
         {/* iOS Date Picker */}

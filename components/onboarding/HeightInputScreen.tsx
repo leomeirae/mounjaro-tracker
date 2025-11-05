@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
 import { useShotsyColors } from '@/hooks/useShotsyColors';
 import { useTheme } from '@/lib/theme-context';
+import { ShotsyCard } from '@/components/ui/shotsy-card';
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
@@ -20,9 +21,9 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
   const colors = useShotsyColors();
   const { currentAccent } = useTheme();
   const [unit, setUnit] = useState<'cm' | 'ft'>('cm');
-  const [heightCm, setHeightCm] = useState(170);
+  const [heightCm, setHeightCm] = useState(175);
   const [heightFt, setHeightFt] = useState(5);
-  const [heightIn, setHeightIn] = useState(7);
+  const [heightIn, setHeightIn] = useState(9);
 
   const handleNext = () => {
     if (unit === 'cm') {
@@ -53,13 +54,13 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
       onBack={onBack}
     >
       <View style={styles.content}>
-        {/* Unit Toggle */}
+        {/* Unit Toggle - Igual ao Shotsy */}
         <View style={styles.unitToggle}>
           <TouchableOpacity
             style={[
               styles.unitButton,
               {
-                backgroundColor: unit === 'cm' ? currentAccent : 'transparent',
+                backgroundColor: unit === 'cm' ? currentAccent : colors.card,
                 borderColor: unit === 'cm' ? currentAccent : colors.border,
               },
             ]}
@@ -68,7 +69,7 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
             <Text
               style={[
                 styles.unitButtonText,
-                { color: unit === 'cm' ? '#FFFFFF' : colors.textSecondary },
+                { color: unit === 'cm' ? '#FFFFFF' : colors.text },
               ]}
             >
               centímetros
@@ -78,7 +79,7 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
             style={[
               styles.unitButton,
               {
-                backgroundColor: unit === 'ft' ? currentAccent : 'transparent',
+                backgroundColor: unit === 'ft' ? currentAccent : colors.card,
                 borderColor: unit === 'ft' ? currentAccent : colors.border,
               },
             ]}
@@ -87,7 +88,7 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
             <Text
               style={[
                 styles.unitButtonText,
-                { color: unit === 'ft' ? '#FFFFFF' : colors.textSecondary },
+                { color: unit === 'ft' ? '#FFFFFF' : colors.text },
               ]}
             >
               polegadas
@@ -95,58 +96,60 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
           </TouchableOpacity>
         </View>
 
-        {/* Picker Container with Fade Effect */}
-        <View style={styles.pickerContainer}>
-          {/* Top Fade */}
-          <LinearGradient
-            colors={[colors.background, 'transparent']}
-            style={styles.fadeTop}
-            pointerEvents="none"
-          />
+        {/* Picker Card - Igual ao Shotsy */}
+        <ShotsyCard variant="elevated" style={styles.pickerCard}>
+          <View style={styles.pickerContainer}>
+            {/* Top Fade */}
+            <LinearGradient
+              colors={[colors.card, 'transparent']}
+              style={styles.fadeTop}
+              pointerEvents="none"
+            />
 
-          {unit === 'cm' ? (
-            <Picker
-              selectedValue={heightCm}
-              onValueChange={(value) => handleHeightChange(value, 'cm')}
-              style={styles.picker}
-              itemStyle={[styles.pickerItem, { color: colors.text }]}
-            >
-              {HEIGHT_RANGE_CM.map((cm) => (
-                <Picker.Item key={cm} label={`${cm}cm`} value={cm} />
-              ))}
-            </Picker>
-          ) : (
-            <View style={styles.dualPickerRow}>
+            {unit === 'cm' ? (
               <Picker
-                selectedValue={heightFt}
-                onValueChange={(value) => handleHeightChange(value, 'ft')}
-                style={styles.pickerHalf}
+                selectedValue={heightCm}
+                onValueChange={(value) => handleHeightChange(value, 'cm')}
+                style={styles.picker}
                 itemStyle={[styles.pickerItem, { color: colors.text }]}
               >
-                {HEIGHT_RANGE_FT.map((ft) => (
-                  <Picker.Item key={ft} label={`${ft} ft`} value={ft} />
+                {HEIGHT_RANGE_CM.map((cm) => (
+                  <Picker.Item key={cm} label={`${cm}cm`} value={cm} />
                 ))}
               </Picker>
-              <Picker
-                selectedValue={heightIn}
-                onValueChange={(value) => handleHeightChange(value, 'in')}
-                style={styles.pickerHalf}
-                itemStyle={[styles.pickerItem, { color: colors.text }]}
-              >
-                {HEIGHT_RANGE_IN.map((inches) => (
-                  <Picker.Item key={inches} label={`${inches} in`} value={inches} />
-                ))}
-              </Picker>
-            </View>
-          )}
+            ) : (
+              <View style={styles.dualPickerRow}>
+                <Picker
+                  selectedValue={heightFt}
+                  onValueChange={(value) => handleHeightChange(value, 'ft')}
+                  style={styles.pickerHalf}
+                  itemStyle={[styles.pickerItem, { color: colors.text }]}
+                >
+                  {HEIGHT_RANGE_FT.map((ft) => (
+                    <Picker.Item key={ft} label={`${ft} ft`} value={ft} />
+                  ))}
+                </Picker>
+                <Picker
+                  selectedValue={heightIn}
+                  onValueChange={(value) => handleHeightChange(value, 'in')}
+                  style={styles.pickerHalf}
+                  itemStyle={[styles.pickerItem, { color: colors.text }]}
+                >
+                  {HEIGHT_RANGE_IN.map((inches) => (
+                    <Picker.Item key={inches} label={`${inches} in`} value={inches} />
+                  ))}
+                </Picker>
+              </View>
+            )}
 
-          {/* Bottom Fade */}
-          <LinearGradient
-            colors={['transparent', colors.background]}
-            style={styles.fadeBottom}
-            pointerEvents="none"
-          />
-        </View>
+            {/* Bottom Fade */}
+            <LinearGradient
+              colors={['transparent', colors.card]}
+              style={styles.fadeBottom}
+              pointerEvents="none"
+            />
+          </View>
+        </ShotsyCard>
       </View>
     </OnboardingScreenBase>
   );
@@ -154,57 +157,69 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
 
 const styles = StyleSheet.create({
   content: {
-    gap: 32,
+    gap: 24,
+    flex: 1,
   },
   unitToggle: {
     flexDirection: 'row',
     gap: 12,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   unitButton: {
     flex: 1,
-    paddingVertical: 14,
-    borderRadius: 24,
-    borderWidth: 2,
+    paddingVertical: 12,
+    borderRadius: 12,
+    borderWidth: 1,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   unitButtonText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '600',
+  },
+  pickerCard: {
+    padding: 0,
+    overflow: 'hidden',
+    marginHorizontal: 16,
   },
   pickerContainer: {
     position: 'relative',
-    height: 220,
+    height: 260,
+    width: '100%',
   },
   fadeTop: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    height: 60,
-    zIndex: 1,
+    height: 80,
+    zIndex: 2,
   },
   fadeBottom: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    height: 60,
-    zIndex: 1,
+    height: 80,
+    zIndex: 2,
   },
   picker: {
-    height: 220,
+    height: 260,
     width: '100%',
   },
   pickerItem: {
-    fontSize: 22,
-    height: 44,
+    fontSize: Platform.OS === 'ios' ? 28 : 24,
+    fontWeight: '600',
+    height: 52,
+    textAlign: 'center',
   },
   dualPickerRow: {
     flexDirection: 'row',
-    height: 220,
+    height: 260,
+    width: '100%',
   },
   pickerHalf: {
     flex: 1,
+    height: 260,
   },
 });
