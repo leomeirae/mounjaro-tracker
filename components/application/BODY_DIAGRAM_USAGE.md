@@ -10,7 +10,7 @@ The `BodyDiagram` component provides a visual SVG body diagram for injection sit
 - ✅ Button grid for easy site selection
 - ✅ Legend explaining visual indicators
 - ✅ Haptic feedback on site selection
-- ✅ Full theme support via `useShotsyColors`
+- ✅ Full theme support via `useThemeColors`
 
 ## Props Interface
 
@@ -187,7 +187,7 @@ BodyDiagram/
 
 ## Styling & Theming
 
-The component uses `useShotsyColors` hook for full theme support:
+The component uses `useThemeColors` hook for full theme support:
 
 - `colors.primary` - Selected sites
 - `colors.success` - Suggested sites
@@ -236,7 +236,7 @@ Potential improvements:
 - Verify history contains recent data
 
 ### Styling issues
-- Confirm `useShotsyColors` hook available
+- Confirm `useThemeColors` hook available
 - Check theme context is provided
 - Verify StyleSheet is not being overridden
 
@@ -261,5 +261,5 @@ isRecentlyUsed('stomach_left'); // true/false
 
 - `react-native-svg` (v15.12.1)
 - `expo-haptics` (v15.0.7)
-- `@/hooks/useShotsyColors`
+- `@/hooks/useThemeColors`
 - `@/components/application/*` (for integration)

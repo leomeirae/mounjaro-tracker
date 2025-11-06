@@ -16,7 +16,7 @@ export function AppRatingScreen({ onNext, onBack }: AppRatingScreenProps) {
   const handleRateNow = async () => {
     const appStoreUrl = Platform.select({
       ios: 'https://apps.apple.com/app/id1234567890', // Substituir com ID real
-      android: 'https://play.google.com/store/apps/details?id=com.shotsy.app',
+      android: 'https://play.google.com/store/apps/details?id=com.mounjarotracker.app',
     });
 
     if (appStoreUrl) {

@@ -1,6 +1,6 @@
-# Sistema de Onboarding do Shotsy
+# Sistema de Onboarding do Mounjaro Tracker
 
-Este diretório contém toda a estrutura de onboarding do aplicativo Shotsy, um sistema completo de 23 telas sequenciais.
+Este diretório contém toda a estrutura de onboarding do aplicativo Mounjaro Tracker, um sistema completo de 23 telas sequenciais.
 
 ## Estrutura de Arquivos
 
@@ -61,11 +61,11 @@ O arquivo `/app/(auth)/onboarding-flow.tsx` gerencia:
 - Checkboxes para múltipla escolha
 - TextInput com validação para números
 - Toggle para alternar unidades (kg/lb, cm/ft)
-- ShotsyCard para cards visuais
-- ShotsyButton para botões principais
+- Card para cards visuais
+- Button para botões principais
 
 ### Temas
-- `useShotsyColors()` para cores consistentes
+- `useThemeColors()` para cores consistentes
 - `useTheme()` para accent colors e temas
 - Suporte completo a modo claro/escuro
 
@@ -157,4 +157,4 @@ Ao completar todas as telas:
 
 ---
 
-**Criado para o Shotsy - Seu companheiro de jornada GLP-1**
+**Mounjaro Tracker - Seu companheiro de jornada GLP-1**
