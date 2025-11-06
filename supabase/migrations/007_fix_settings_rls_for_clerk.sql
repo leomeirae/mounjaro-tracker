@@ -44,3 +44,4 @@ DROP POLICY IF EXISTS "Users can update own settings" ON public.settings;
 
 
 
+
