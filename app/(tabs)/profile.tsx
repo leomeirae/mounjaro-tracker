@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { useAuth, useUser as useClerkUser } from '@/lib/clerk';
 import { useUser } from '@/hooks/useUser';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-simple';
 import { useRouter } from 'expo-router';
 import { useColors } from '@/constants/colors';
 import { useTheme } from '@/lib/theme-context';

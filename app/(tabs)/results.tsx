@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { View, StyleSheet, ScrollView, RefreshControl, Text, TouchableOpacity } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useWeights } from '@/hooks/useWeights';
 import { useProfile } from '@/hooks/useProfile';
 import { useApplications } from '@/hooks/useApplications';
@@ -16,7 +16,7 @@ import { WeightIcon, SparkleIcon } from '@/components/ui/icons';
 import { useRouter } from 'expo-router';
 
 export default function ResultsScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const router = useRouter();
   const { weights, loading: weightsLoading, refetch: refetchWeights } = useWeights();
   const { profile, loading: profileLoading, refetch: refetchProfile } = useProfile();
@@ -304,12 +304,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingTop: 56,  // Mudança: 60 → 56px (Shotsy header padding)
-    paddingBottom: 16,  // Mudança: 12 → 16px (Shotsy bottom padding)
+    paddingTop: 56,  // Mudança: 60 → 56px (design system header padding)
+    paddingBottom: 16,  // Mudança: 12 → 16px (design system bottom padding)
     borderBottomWidth: 1,
   },
   headerTitle: {
-    fontSize: 26,  // Mudança: 28 → 26px (Shotsy title size)
+    fontSize: 26,  // Mudança: 28 → 26px (design system title size)
     fontWeight: '700',
   },
   content: {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 
 interface MotivationalMessageScreenProps {
   onNext: () => void;
@@ -18,7 +18,7 @@ export function MotivationalMessageScreen({
   weightToLose = 10,
   weightUnit = 'kg',
 }: MotivationalMessageScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
 
   const getMotivationalMessage = () => {
@@ -42,22 +42,22 @@ export function MotivationalMessageScreen({
       <View style={styles.content}>
         <Text style={styles.emoji}>💪</Text>
 
-        <ShotsyCard variant="elevated" style={styles.messageCard}>
+        <Card variant="elevated" style={styles.messageCard}>
           <Text style={[styles.goalText, { color: colors.textSecondary }]}>
             Sua meta é perder
           </Text>
           <Text style={[styles.goalNumber, { color: currentAccent }]}>
             {weightToLose.toFixed(1)} {weightUnit}
           </Text>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={styles.motivationCard}>
+        <Card style={styles.motivationCard}>
           <Text style={[styles.motivationText, { color: colors.text }]}>
             {getMotivationalMessage()}
           </Text>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={styles.tipsCard}>
+        <Card style={styles.tipsCard}>
           <Text style={[styles.tipsTitle, { color: colors.text }]}>
             Dicas para o sucesso:
           </Text>
@@ -87,7 +87,7 @@ export function MotivationalMessageScreen({
               </Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
       </View>
     </OnboardingScreenBase>
   );

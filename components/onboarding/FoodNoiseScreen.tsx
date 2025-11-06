@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import { Ionicons } from '@expo/vector-icons';
 
 interface FoodNoiseScreenProps {
@@ -23,7 +23,7 @@ const daysOfWeek = [
 ];
 
 export function FoodNoiseScreen({ onNext, onBack }: FoodNoiseScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -42,7 +42,7 @@ export function FoodNoiseScreen({ onNext, onBack }: FoodNoiseScreenProps) {
       disableNext={!selected}
     >
       <View style={styles.content}>
-        <ShotsyCard style={styles.explanationCard}>
+        <Card style={styles.explanationCard}>
           <Text style={styles.explanationEmoji}>🧠</Text>
           <Text style={[styles.explanationTitle, { color: colors.text }]}>
             O que é "food noise"?
@@ -52,7 +52,7 @@ export function FoodNoiseScreen({ onNext, onBack }: FoodNoiseScreenProps) {
             resistir a desejos e manter escolhas alimentares saudáveis. Medicamentos
             GLP-1 ajudam a reduzir esse "ruído mental".
           </Text>
-        </ShotsyCard>
+        </Card>
 
         <View style={styles.optionsList}>
           {daysOfWeek.map((day) => (

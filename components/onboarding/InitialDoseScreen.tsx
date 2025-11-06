@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -30,7 +30,7 @@ const doses = {
 };
 
 export function InitialDoseScreen({ onNext, onBack, medication = 'tirzepatide' }: InitialDoseScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [selected, setSelected] = useState<string | null>(null);
 

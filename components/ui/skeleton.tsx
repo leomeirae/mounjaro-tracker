@@ -7,7 +7,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface SkeletonProps {
   width?: ViewStyle['width'];
@@ -22,7 +22,7 @@ export function Skeleton({
   borderRadius = 8,
   style,
 }: SkeletonProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const opacity = useSharedValue(0.3);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export function Skeleton({
 
 // ✅ Skeleton para ShotHistoryCards
 export function ShotHistoryCardsSkeleton() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <View style={styles.container}>
@@ -88,7 +88,7 @@ export function ShotHistoryCardsSkeleton() {
 
 // ✅ Skeleton para NextShotWidget
 export function NextShotWidgetSkeleton() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <View style={[styles.widgetContainer, { backgroundColor: colors.card }]}>
@@ -102,7 +102,7 @@ export function NextShotWidgetSkeleton() {
 
 // ✅ Skeleton para TodaySection
 export function TodaySectionSkeleton() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <View style={styles.container}>

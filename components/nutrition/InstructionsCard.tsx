@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { Info } from 'phosphor-react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 export function InstructionsCard() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const styles = getStyles(colors);
 
   return (

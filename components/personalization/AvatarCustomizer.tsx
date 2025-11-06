@@ -17,7 +17,7 @@ import {
   DEFAULT_AVATAR_COLORS,
   AVATAR_ACCESSORIES,
 } from '@/lib/types/avatar';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 const { width } = Dimensions.get('window');
 
@@ -31,7 +31,7 @@ export const AvatarCustomizer: React.FC<AvatarCustomizerProps> = ({
   showSkip = false,
 }) => {
   const { avatar, updateAvatar, loading: avatarLoading } = useAvatar();
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const [selectedStyle, setSelectedStyle] = useState<AvatarStyle>('minimal');
   const [selectedColor, setSelectedColor] = useState('#0891B2');

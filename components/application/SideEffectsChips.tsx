@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface SideEffectsChipsProps {
   value: string[];
@@ -21,7 +21,7 @@ const SIDE_EFFECTS = [
 ];
 
 export function SideEffectsChips({ value, onChange }: SideEffectsChipsProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const toggleEffect = (effect: string) => {
     if (value.includes(effect)) {

@@ -5,7 +5,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { usePremiumFeatures } from '@/hooks/usePremiumFeatures';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { trackEvent } from '@/lib/analytics';
 
 interface PremiumGateProps {
@@ -17,7 +17,7 @@ interface PremiumGateProps {
 export function PremiumGate({ children, featureName, fallback }: PremiumGateProps) {
   const { hasPremium, loading } = usePremiumFeatures();
   const router = useRouter();
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   if (loading) {
     return (

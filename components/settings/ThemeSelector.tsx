@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/lib/theme-context';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 export const ThemeSelector: React.FC = () => {
   const { mode, setMode } = useTheme();
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const themes = [
     { id: 'light' as const, label: 'Claro', icon: '☀️' },

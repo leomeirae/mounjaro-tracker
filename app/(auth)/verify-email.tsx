@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, Alert, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useSignUp } from '@clerk/clerk-expo';
 import { useRouter } from 'expo-router';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-simple';
 import { Input } from '@/components/ui/input';
 import { useColors } from '@/constants/colors';
 

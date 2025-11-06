@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { useTheme } from '@/lib/theme-context';
 
 interface WeightDataPoint {
@@ -19,7 +19,7 @@ export const WeeklyAverageChart: React.FC<WeeklyAverageChartProps> = ({
   data,
   periodFilter,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const { width } = useWindowDimensions();
 
@@ -94,14 +94,14 @@ export const WeeklyAverageChart: React.FC<WeeklyAverageChartProps> = ({
 
   if (!hasData) {
     return (
-      <ShotsyCard style={styles.card}>
+      <Card style={styles.card}>
         <Text style={[styles.title, { color: colors.text }]}>Perda Semanal</Text>
         <View style={styles.emptyState}>
           <Text style={[styles.emptyStateText, { color: colors.textSecondary }]}>
             Adicione registros de peso de pelo menos 2 semanas para visualizar esta comparação.
           </Text>
         </View>
-      </ShotsyCard>
+      </Card>
     );
   }
 
@@ -125,7 +125,7 @@ export const WeeklyAverageChart: React.FC<WeeklyAverageChartProps> = ({
   };
 
   return (
-    <ShotsyCard style={styles.card}>
+    <Card style={styles.card}>
       <Text style={[styles.title, { color: colors.text }]}>Perda Semanal</Text>
 
       <View style={styles.statsRow}>
@@ -179,7 +179,7 @@ export const WeeklyAverageChart: React.FC<WeeklyAverageChartProps> = ({
       <Text style={[styles.hint, { color: colors.textSecondary }]}>
         Compare a perda de peso entre diferentes semanas do tratamento
       </Text>
-    </ShotsyCard>
+    </Card>
   );
 };
 

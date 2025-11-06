@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import Svg, { Path, Line as SvgLine, Text as SvgText, Circle } from 'react-native-svg';
 import { buildLineAndAreaGeometry } from './chartUtils';
 
@@ -24,7 +24,7 @@ const fluctuationData = [
 ];
 
 export function FluctuationsEducationScreen({ onNext, onBack }: FluctuationsEducationScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
 
   const chartWidth = useMemo(() => Dimensions.get('window').width - 80, []);
@@ -67,7 +67,7 @@ export function FluctuationsEducationScreen({ onNext, onBack }: FluctuationsEduc
       nextButtonText="Entendi"
     >
       <View style={styles.content}>
-        <ShotsyCard variant="elevated" style={styles.graphCard}>
+        <Card variant="elevated" style={styles.graphCard}>
           <Text style={[styles.graphTitle, { color: colors.text }]}>
             Flutuações típicas de peso
           </Text>
@@ -163,9 +163,9 @@ export function FluctuationsEducationScreen({ onNext, onBack }: FluctuationsEduc
           <Text style={[styles.graphCaption, { color: colors.textMuted }]}>
             Variações de até 2kg são completamente normais
           </Text>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={styles.factorsCard}>
+        <Card style={styles.factorsCard}>
           <Text style={[styles.factorsTitle, { color: colors.text }]}>
             Fatores que afetam o peso diário:
           </Text>
@@ -201,15 +201,15 @@ export function FluctuationsEducationScreen({ onNext, onBack }: FluctuationsEduc
               </Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={[styles.tipCard, { borderLeftColor: currentAccent }]}>
+        <Card style={[styles.tipCard, { borderLeftColor: currentAccent }]}>
           <Text style={styles.tipEmoji}>💡</Text>
           <Text style={[styles.tipText, { color: colors.textSecondary }]}>
             Foque na tendência geral, não nos números diários. O que importa é a
             direção que você está seguindo ao longo das semanas.
           </Text>
-        </ShotsyCard>
+        </Card>
       </View>
     </OnboardingScreenBase>
   );

@@ -1,22 +1,22 @@
 import React from 'react';
 import { ScrollView, View, StyleSheet, RefreshControl, Text } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { EstimatedLevelsChart } from '@/components/dashboard/EstimatedLevelsChart';
 import { NextShotWidget } from '@/components/dashboard/NextShotWidget';
 import { TodaySection } from '@/components/dashboard/TodaySection';
 import { ShotHistoryCards } from '@/components/dashboard/ShotHistoryCards';
 import { ResultsPreview, Metrics } from '@/components/dashboard/ResultsPreview';
-import { ShotsyButton } from '@/components/ui/shotsy-button';
+import { Button } from '@/components/ui/button-simple';
 import { router } from 'expo-router';
 import { useApplications } from '@/hooks/useApplications';
 import { useWeights } from '@/hooks/useWeights';
 import { useProfile } from '@/hooks/useProfile';
 import { useNutrition } from '@/hooks/useNutrition';
-import { NextShotWidgetSkeleton, ShotHistoryCardsSkeleton } from '@/components/ui/shotsy-skeleton';
+import { NextShotWidgetSkeleton, ShotHistoryCardsSkeleton } from '@/components/ui/skeleton';
 import { calculateNextShotDate } from '@/lib/pharmacokinetics';
 
 export default function DashboardScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const [refreshing, setRefreshing] = React.useState(false);
 
   // Fetch real data from Supabase
@@ -181,7 +181,7 @@ export default function DashboardScreen() {
       <Text style={[styles.emptyStateSubtitle, { color: colors.textSecondary }]}>
         Adicione sua primeira injeção para começar a acompanhar seu progresso
       </Text>
-      <ShotsyButton
+      <Button
         title="+ Adicionar Primeira Injeção"
         onPress={handleAddShot}
         size="large"
@@ -252,7 +252,7 @@ export default function DashboardScreen() {
 
             {/* Add Shot Button */}
             <View style={styles.buttonContainer}>
-              <ShotsyButton
+              <Button
                 title="+ Adicionar Injeção"
                 onPress={handleAddShot}
                 size="large"
@@ -277,8 +277,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    padding: 20,  // Mudança: 16 → 20px (Shotsy horizontal padding)
-    paddingTop: 64,  // Mudança: 60 → 64px (Shotsy status bar + title space)
+    padding: 20,  // Mudança: 16 → 20px (design system horizontal padding)
+    paddingTop: 64,  // Mudança: 60 → 64px (design system status bar + title space)
   },
   buttonContainer: {
     marginVertical: 16,
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
     height: 24,
   },
   chartPlaceholder: {
-    height: 220,  // Mudança: 200 → 220px (Shotsy chart height)
+    height: 220,  // Mudança: 200 → 220px (design system chart height)
     marginBottom: 16,
   },
   emptyStateContainer: {
@@ -301,11 +301,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
   emptyStateEmoji: {
-    fontSize: 72,  // Mudança: 80 → 72px (Shotsy emoji size)
+    fontSize: 72,  // Mudança: 80 → 72px (design system emoji size)
     marginBottom: 24,
   },
   emptyStateTitle: {
-    fontSize: 22,  // Mudança: 24 → 22px (Shotsy title size)
+    fontSize: 22,  // Mudança: 24 → 22px (design system title size)
     fontWeight: '700',
     textAlign: 'center',
     marginBottom: 12,

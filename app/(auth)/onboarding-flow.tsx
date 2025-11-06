@@ -1,12 +1,12 @@
 // app/(auth)/onboarding-flow.tsx
-// Onboarding completo com 23 telas conforme Shotsy
+// Onboarding completo com 23 telas conforme design system
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, StatusBar, Alert, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { OnboardingProgressBar } from '@/components/onboarding';
 import { useFeatureFlag } from '@/lib/feature-flags';
 import { useOnboarding } from '@/hooks/useOnboarding';
@@ -40,7 +40,7 @@ import {
   AppRatingScreen,
 } from '@/components/onboarding';
 
-// Tipos de steps conforme ordem do Shotsy (sem welcome - carrossel é antes do login)
+// Tipos de steps conforme ordem do design system (sem welcome - carrossel é antes do login)
 export type OnboardingStep =
   | 'widgets'
   | 'charts'
@@ -100,7 +100,7 @@ interface OnboardingData {
 }
 
 export default function OnboardingFlowScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const router = useRouter();
   const { isSignedIn, isLoaded: authLoaded } = useAuth();
   const { user, loading: userLoading } = useUser();

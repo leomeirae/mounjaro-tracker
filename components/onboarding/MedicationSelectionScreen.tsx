@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -20,7 +20,7 @@ const medications = [
 ];
 
 export function MedicationSelectionScreen({ onNext, onBack }: MedicationSelectionScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   option: {
-    borderRadius: 16,  // Mudança: 12 → 16px (match Shotsy)
+    borderRadius: 16,  // Mudança: 12 → 16px (match design system)
     paddingVertical: 20,  // Mudança: separar padding vertical
     paddingHorizontal: 16,  // Mudança: padding horizontal explícito
-    minHeight: 72,  // Mudança: 60 → 72px (match Shotsy)
+    minHeight: 72,  // Mudança: 60 → 72px (match design system)
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -94,9 +94,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   optionTitle: {
-    fontSize: 18,  // Mudança: 17 → 18px (match Shotsy)
+    fontSize: 18,  // Mudança: 17 → 18px (match design system)
     fontWeight: '600',
-    marginBottom: 4,  // Mudança: 2 → 4px (match Shotsy)
+    marginBottom: 4,  // Mudança: 2 → 4px (match design system)
   },
   optionDescription: {
     fontSize: 13,

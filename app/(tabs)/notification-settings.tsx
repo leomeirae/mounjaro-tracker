@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, Switch, Alert, Pressable } from 're
 import { useRouter } from 'expo-router';
 import { useUser } from '@/hooks/useUser';
 import { useNotifications } from '@/hooks/useNotifications';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-simple';
 import { useColors } from '@/constants/colors';
 
 export default function NotificationSettingsScreen() {

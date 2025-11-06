@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Switch } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
 
 interface SettingsRowProps {
@@ -28,7 +28,7 @@ export const SettingsRow: React.FC<SettingsRowProps> = ({
   showBorder = true,
   destructive = false,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
 
   const content = (
@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingVertical: 12,  // Mudança: 14 → 12px (Shotsy vertical padding)
-    minHeight: 56,  // Mudança: 50 → 56px (Shotsy touch target, better UX)
+    paddingVertical: 12,  // Mudança: 14 → 12px (design system vertical padding)
+    minHeight: 56,  // Mudança: 50 → 56px (design system touch target, better UX)
   },
   leftContent: {
     flexDirection: 'row',

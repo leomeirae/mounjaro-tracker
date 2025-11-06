@@ -6,7 +6,7 @@ import {
   AudioModule,
 } from 'expo-audio';
 import { Microphone, Stop } from 'phosphor-react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import * as Haptics from 'expo-haptics';
 
 interface AudioRecorderProps {
@@ -15,7 +15,7 @@ interface AudioRecorderProps {
 }
 
 export function AudioRecorder({ onRecordComplete, disabled }: AudioRecorderProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const styles = getStyles(colors);
 
   // Configure audio recorder with proper options

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ShotsyTheme, AccentColor, SHOTSY_THEMES, ACCENT_COLORS, SHOTSY_COLORS } from '@/constants/ShotsyThemes';
+import { ShotsyTheme, AccentColor, SHOTSY_THEMES, ACCENT_COLORS, SHOTSY_COLORS } from '@/constants/AppThemes';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 

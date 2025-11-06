@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { Trash, Pencil } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 
@@ -26,7 +26,7 @@ export function NutritionCard({
   onDelete,
   onEdit,
 }: NutritionCardProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const styles = getStyles(colors);
 
   const handleDelete = async () => {

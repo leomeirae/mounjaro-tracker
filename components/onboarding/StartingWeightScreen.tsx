@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Platform } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -17,7 +17,7 @@ export function StartingWeightScreen({
   onBack,
   weightUnit = 'kg',
 }: StartingWeightScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const [weight, setWeight] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -49,7 +49,7 @@ export function StartingWeightScreen({
       contentContainerStyle={styles.screenContent}
     >
       <View style={styles.content}>
-        <ShotsyCard variant="elevated" style={styles.editableCard}>
+        <Card variant="elevated" style={styles.editableCard}>
           <View style={[styles.cardIcon, { backgroundColor: colors.cardSecondary }]}>
             <Text style={styles.icon}>⚖️</Text>
           </View>
@@ -67,10 +67,10 @@ export function StartingWeightScreen({
               <Text style={[styles.unitSuffix, { color: colors.textSecondary }]}>{weightUnit}</Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
 
         <TouchableOpacity activeOpacity={0.7} onPress={() => setShowDatePicker(true)}>
-          <ShotsyCard variant="elevated" style={styles.editableCard}>
+          <Card variant="elevated" style={styles.editableCard}>
             <View style={[styles.cardIcon, { backgroundColor: colors.cardSecondary }]}>
               <Text style={styles.icon}>📅</Text>
             </View>
@@ -81,7 +81,7 @@ export function StartingWeightScreen({
             <View style={styles.cardAction}>
               <Ionicons name="pencil" size={20} color={colors.textMuted} />
             </View>
-          </ShotsyCard>
+          </Card>
         </TouchableOpacity>
 
         {showDatePicker && (

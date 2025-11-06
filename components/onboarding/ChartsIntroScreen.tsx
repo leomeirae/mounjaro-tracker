@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import Svg, {
   Defs,
   LinearGradient,
@@ -32,7 +32,7 @@ const sampleChartData = [
 ];
 
 export function ChartsIntroScreen({ onNext, onBack }: ChartsIntroScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
 
   const chartWidth = useMemo(() => Dimensions.get('window').width - 64, []);
@@ -63,7 +63,7 @@ export function ChartsIntroScreen({ onNext, onBack }: ChartsIntroScreenProps) {
       onBack={onBack}
     >
       <View style={styles.content}>
-        <ShotsyCard variant="elevated" style={styles.chartPreview}>
+        <Card variant="elevated" style={styles.chartPreview}>
           <Svg height={chartHeight} width={chartWidth}>
             <Defs>
               <LinearGradient id="chartsIntroGradient" x1="0" y1="0" x2="0" y2="1">
@@ -144,7 +144,7 @@ export function ChartsIntroScreen({ onNext, onBack }: ChartsIntroScreenProps) {
           <Text style={[styles.chartTimestamp, { color: colors.textMuted }]}>
             28 de out. de 2025, 10
               </Text>
-        </ShotsyCard>
+        </Card>
 
         <Text style={[styles.disclaimer, { color: colors.textSecondary }]}>
           Mounjaro Tracker usa resultados de ensaios clínicos publicados pela FDA 

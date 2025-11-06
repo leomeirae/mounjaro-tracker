@@ -2,13 +2,13 @@ import React from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { useTheme } from '@/lib/theme-context';
 
-interface ShotsyCardProps {
+interface CardProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
   variant?: 'default' | 'elevated' | 'outline';
 }
 
-export function ShotsyCard({ children, style, variant = 'default' }: ShotsyCardProps) {
+export function Card({ children, style, variant = 'default' }: CardProps) {
   const { effectiveMode, colors } = useTheme();
   const isDark = effectiveMode === 'dark';
 

@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useHealthScore } from '@/hooks/useHealthScore';
 import { getScoreLevel } from '@/lib/types/insights';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 export const HealthScoreCard: React.FC<{ onPress?: () => void }> = ({ onPress }) => {
   const { score, loading } = useHealthScore();
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   if (loading || !score) return null;
 

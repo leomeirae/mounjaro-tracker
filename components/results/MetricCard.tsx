@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from '@/components/ui/icons';
 
 interface MetricCardProps {
@@ -19,7 +19,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   trend,
   accentColor,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const getTrendIcon = () => {
     if (!trend) return null;
@@ -34,7 +34,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   };
 
   return (
-    <ShotsyCard style={styles.card}>
+    <Card style={styles.card}>
       <Text style={[styles.title, { color: colors.textSecondary }]}>{title}</Text>
       <View style={styles.valueContainer}>
         {trend && (
@@ -56,7 +56,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
           {subtitle}
         </Text>
       )}
-    </ShotsyCard>
+    </Card>
   );
 };
 

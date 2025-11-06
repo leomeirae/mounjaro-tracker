@@ -11,9 +11,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyButton } from '@/components/ui/shotsy-button';
+import { Button } from '@/components/ui/button-simple';
 import { useFeatureFlag } from '@/lib/feature-flags';
 import { useAuth } from '@/lib/clerk';
 import { useUser } from '@/hooks/useUser';
@@ -21,7 +21,7 @@ import { trackEvent } from '@/lib/analytics';
 
 const { width } = Dimensions.get('window');
 
-// Slides do carrossel - 4 imagens novas com fundo transparente (igual ao Shotsy)
+// Slides do carrossel - 4 imagens novas com fundo transparente (igual ao design system)
 const slides = [
   {
     id: '1',
@@ -54,7 +54,7 @@ const slides = [
 ];
 
 export default function WelcomeScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const { isSignedIn, isLoaded } = useAuth();
   const { user } = useUser();
@@ -149,7 +149,7 @@ export default function WelcomeScreen() {
       <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.fallbackContainer}>
           <View style={styles.buttonContainer}>
-            <ShotsyButton
+            <Button
               title="Começar"
               onPress={handleStart}
             />
@@ -201,7 +201,7 @@ export default function WelcomeScreen() {
         )}
       />
 
-      {/* Conteúdo abaixo da imagem (igual ao Shotsy) */}
+      {/* Conteúdo abaixo da imagem (igual ao design system) */}
       <View style={[styles.contentWrapper, { backgroundColor: colors.background }]}>
         {/* Título e Subtítulo */}
         <View style={styles.textContainer}>
@@ -233,7 +233,7 @@ export default function WelcomeScreen() {
 
         {/* Botão */}
         <View style={styles.buttonContainer}>
-          <ShotsyButton
+          <Button
             title={currentIndex === slides.length - 1 ? 'Começar' : 'Próximo'}
             onPress={handleNext}
           />
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
   contentWrapper: {
     paddingHorizontal: 24,
     paddingBottom: 40,
-    paddingTop: 32,  // Mudança: 24 → 32px (Shotsy spacing)
+    paddingTop: 32,  // Mudança: 24 → 32px (design system spacing)
   },
   textContainer: {
     marginBottom: 24,
@@ -302,18 +302,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 12,
-    lineHeight: 42,  // Mudança: 40 → 42px (Shotsy line height)
+    lineHeight: 42,  // Mudança: 40 → 42px (design system line height)
   },
   subtitle: {
     fontSize: 16,
     textAlign: 'center',
-    lineHeight: 26,  // Mudança: 24 → 26px (Shotsy line height)
+    lineHeight: 26,  // Mudança: 24 → 26px (design system line height)
   },
   pagination: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 10,  // Mudança: 8 → 10px (Shotsy dot spacing)
+    gap: 10,  // Mudança: 8 → 10px (design system dot spacing)
     marginBottom: 24,
   },
   dot: {
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   buttonContainer: {
-    marginBottom: 20,  // Mudança: 16 → 20px (Shotsy spacing to terms)
+    marginBottom: 20,  // Mudança: 16 → 20px (design system spacing to terms)
   },
   termsContainer: {
     paddingHorizontal: 12,

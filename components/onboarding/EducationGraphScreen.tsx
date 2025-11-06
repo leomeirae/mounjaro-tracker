@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import Svg, {
   Defs,
   LinearGradient,
@@ -34,7 +34,7 @@ const pharmacokineticData = [
 ];
 
 export function EducationGraphScreen({ onNext, onBack }: EducationGraphScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
 
   const chartWidth = useMemo(() => Dimensions.get('window').width - 64, []);
@@ -72,7 +72,7 @@ export function EducationGraphScreen({ onNext, onBack }: EducationGraphScreenPro
       nextButtonText="Entendi"
     >
       <View style={styles.content}>
-        <ShotsyCard variant="elevated" style={styles.graphCard}>
+        <Card variant="elevated" style={styles.graphCard}>
           <Svg height={chartHeight} width={chartWidth}>
             <Defs>
               <LinearGradient id="educationGradient" x1="0" y1="0" x2="0" y2="1">
@@ -173,23 +173,23 @@ export function EducationGraphScreen({ onNext, onBack }: EducationGraphScreenPro
           <Text style={[styles.peakLabel, { color: currentAccent }]}>
             ← Pico: 1.2mg (dia 4)
           </Text>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={styles.infoCard}>
+        <Card style={styles.infoCard}>
           <Text style={[styles.infoTitle, { color: colors.text }]}>
             Como funciona?
           </Text>
           <Text style={[styles.infoText, { color: colors.textSecondary }]}>
             Após cada aplicação, o nível do medicamento aumenta gradualmente e depois diminui ao longo dos dias. O gráfico acima mostra uma estimativa desses níveis.
           </Text>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={[styles.warningCard, { backgroundColor: colors.card }]}>
+        <Card style={[styles.warningCard, { backgroundColor: colors.card }]}>
           <Text style={styles.warningEmoji}>💡</Text>
           <Text style={[styles.warningText, { color: colors.textSecondary }]}>
             Essas estimativas são baseadas em dados clínicos e podem variar de pessoa para pessoa. Sempre siga as orientações do seu médico.
           </Text>
-        </ShotsyCard>
+        </Card>
       </View>
     </OnboardingScreenBase>
   );
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   infoCard: {
-    padding: 20, // Mudança: 16 → 20px (match Shotsy)
+    padding: 20, // Mudança: 16 → 20px (match design system)
   },
   infoTitle: {
     fontSize: 18,

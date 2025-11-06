@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Skeleton } from '@/components/ui/shotsy-skeleton';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Card } from '@/components/ui/card';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 export function MetricCardSkeleton() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <View style={[styles.metricCard, { backgroundColor: colors.card }]}>
@@ -17,10 +17,10 @@ export function MetricCardSkeleton() {
 }
 
 export function ChartSkeleton() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
-    <ShotsyCard style={styles.chartCard}>
+    <Card style={styles.chartCard}>
       <Skeleton width="50%" height={20} style={{ marginBottom: 16 }} />
       <Skeleton width="100%" height={220} borderRadius={16} style={{ marginBottom: 12 }} />
       <View style={styles.legendRow}>
@@ -28,15 +28,15 @@ export function ChartSkeleton() {
         <Skeleton width={80} height={12} />
         <Skeleton width={100} height={12} />
       </View>
-    </ShotsyCard>
+    </Card>
   );
 }
 
 export function DetailedStatsSkeleton() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
-    <ShotsyCard style={styles.statsCard}>
+    <Card style={styles.statsCard}>
       <Skeleton width="60%" height={20} style={{ marginBottom: 16 }} />
       <View style={styles.statsRow}>
         <View style={styles.statItem}>
@@ -58,7 +58,7 @@ export function DetailedStatsSkeleton() {
           <Skeleton width="60%" height={24} />
         </View>
       </View>
-    </ShotsyCard>
+    </Card>
   );
 }
 

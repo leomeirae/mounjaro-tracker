@@ -19,7 +19,7 @@ const DEFAULT_FLAGS: FeatureFlags = {
   FF_FAQ: false, // Ativar após implementação completa
   FF_ONBOARDING_23: true, // ✅ ATIVADO para teste da jornada completa
   FF_TRIAL: false, // Ativar após implementação completa
-  FF_MARKETING_CAROUSEL_SHOTSY: true, // Carrossel Shotsy com 4 imagens
+  FF_MARKETING_CAROUSEL_SHOTSY: true, // Carrossel design system com 4 imagens
 };
 
 let cachedFlags: FeatureFlags | null = null;

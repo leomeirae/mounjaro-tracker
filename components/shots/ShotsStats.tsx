@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 
 interface ShotsStatsProps {
   totalShots: number;
@@ -14,32 +14,32 @@ export const ShotsStats: React.FC<ShotsStatsProps> = ({
   currentDose,
   daysUntilNext,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <View style={styles.container}>
-      <ShotsyCard style={styles.statCard}>
+      <Card style={styles.statCard}>
         <Text style={[styles.statValue, { color: colors.primary }]}>{totalShots}</Text>
         <Text style={[styles.statLabel, { color: colors.textSecondary }]}>
           Total de Injeções
         </Text>
-      </ShotsyCard>
+      </Card>
 
-      <ShotsyCard style={styles.statCard}>
+      <Card style={styles.statCard}>
         <Text style={[styles.statValue, { color: colors.primary }]}>{currentDose}mg</Text>
         <Text style={[styles.statLabel, { color: colors.textSecondary }]}>
           Dose Atual
         </Text>
-      </ShotsyCard>
+      </Card>
 
-      <ShotsyCard style={styles.statCard}>
+      <Card style={styles.statCard}>
         <Text style={[styles.statValue, { color: colors.primary }]}>
           {daysUntilNext === 0 ? 'Hoje' : `${daysUntilNext}d`}
         </Text>
         <Text style={[styles.statLabel, { color: colors.textSecondary }]}>
           Próxima em
         </Text>
-      </ShotsyCard>
+      </Card>
     </View>
   );
 };

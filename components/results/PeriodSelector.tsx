@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
 
 export type PeriodFilter = '7days' | '30days' | '90days' | 'all';
@@ -21,7 +21,7 @@ export const PeriodSelector: React.FC<PeriodSelectorProps> = ({
   selectedPeriod,
   onPeriodChange,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
 
   return (

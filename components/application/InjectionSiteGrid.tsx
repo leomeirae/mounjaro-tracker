@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface InjectionSiteGridProps {
   value: string[];
@@ -17,7 +17,7 @@ const INJECTION_SITES = [
 ];
 
 export function InjectionSiteGrid({ value, onChange }: InjectionSiteGridProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const toggleSite = (siteId: string) => {
     if (value.includes(siteId)) {

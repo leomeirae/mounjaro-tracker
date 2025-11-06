@@ -1,6 +1,6 @@
 import { useTheme } from '@/lib/theme-context';
 
-export function useShotsyColors() {
+export function useThemeColors() {
   const { effectiveMode, colors } = useTheme();
   const isDark = effectiveMode === 'dark';
 

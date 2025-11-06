@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { router } from 'expo-router';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import * as Haptics from 'expo-haptics';
@@ -22,7 +22,7 @@ interface ShotCardProps {
 }
 
 export const ShotCard: React.FC<ShotCardProps> = ({ shot, onDelete }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const swipeableRef = useRef<Swipeable>(null);
 
   const formatDate = (date: Date) => {
@@ -131,7 +131,7 @@ export const ShotCard: React.FC<ShotCardProps> = ({ shot, onDelete }) => {
         onPress={handleEdit}
         activeOpacity={0.7}
       >
-        <ShotsyCard style={styles.card}>
+        <Card style={styles.card}>
           <View style={styles.header}>
             <View>
               <Text style={[styles.date, { color: colors.text }]}>
@@ -185,7 +185,7 @@ export const ShotCard: React.FC<ShotCardProps> = ({ shot, onDelete }) => {
               </Text>
             )}
           </View>
-        </ShotsyCard>
+        </Card>
       </TouchableOpacity>
     </Swipeable>
   );

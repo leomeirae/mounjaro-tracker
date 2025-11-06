@@ -3,19 +3,19 @@ import { View, StyleSheet } from 'react-native';
 import Svg, { Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 import { useTheme } from '@/lib/theme-context';
 
-interface ShotsyCircularProgressProps {
+interface CircularProgressProps {
   size?: number;
   strokeWidth?: number;
   progress: number; // 0 to 1
   children?: React.ReactNode;
 }
 
-export function ShotsyCircularProgress({
+export function CircularProgress({
   size = 200,
   strokeWidth = 12,
   progress,
   children,
-}: ShotsyCircularProgressProps) {
+}: CircularProgressProps) {
   const { themeGradient } = useTheme();
 
   const radius = (size - strokeWidth) / 2;

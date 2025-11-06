@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useUser } from '@clerk/clerk-expo';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { router } from 'expo-router';
 
 export const UserProfile: React.FC = () => {
   const { user } = useUser();
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const handlePress = () => {
     router.push('/(tabs)/profile');

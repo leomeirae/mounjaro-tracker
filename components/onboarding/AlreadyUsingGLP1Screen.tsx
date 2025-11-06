@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
 
 interface AlreadyUsingGLP1ScreenProps {
@@ -10,7 +10,7 @@ interface AlreadyUsingGLP1ScreenProps {
 }
 
 export function AlreadyUsingGLP1Screen({ onNext, onBack }: AlreadyUsingGLP1ScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [selected, setSelected] = useState<boolean | null>(null);
 

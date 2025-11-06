@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Alert, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Pressable } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-simple';
 import { Input } from '@/components/ui/input';
 import { useSideEffects } from '@/hooks/useSideEffects';
 import { useColors } from '@/constants/colors';

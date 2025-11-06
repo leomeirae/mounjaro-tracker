@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { useTheme } from '@/lib/theme-context';
 
 interface WeightDataPoint {
@@ -23,7 +23,7 @@ export const ProgressChart: React.FC<ProgressChartProps> = ({
   targetWeight,
   periodFilter,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const { width } = useWindowDimensions();
 
@@ -86,14 +86,14 @@ export const ProgressChart: React.FC<ProgressChartProps> = ({
 
   if (!hasData) {
     return (
-      <ShotsyCard style={styles.card}>
+      <Card style={styles.card}>
         <Text style={[styles.title, { color: colors.text }]}>Progresso até a Meta</Text>
         <View style={styles.emptyState}>
           <Text style={[styles.emptyStateText, { color: colors.textSecondary }]}>
             Adicione mais registros de peso para visualizar seu progresso.
           </Text>
         </View>
-      </ShotsyCard>
+      </Card>
     );
   }
 
@@ -132,7 +132,7 @@ export const ProgressChart: React.FC<ProgressChartProps> = ({
   };
 
   return (
-    <ShotsyCard style={styles.card}>
+    <Card style={styles.card}>
       <View style={styles.header}>
         <View>
           <Text style={[styles.title, { color: colors.text }]}>Progresso até a Meta</Text>
@@ -206,7 +206,7 @@ export const ProgressChart: React.FC<ProgressChartProps> = ({
           </View>
         )}
       </View>
-    </ShotsyCard>
+    </Card>
   );
 };
 

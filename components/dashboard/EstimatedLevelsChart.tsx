@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, Pressable, Dimensions, ScrollView } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useApplications } from '@/hooks/useApplications';
 import { Info, CalendarBlank } from 'phosphor-react-native';
 import { calculateEstimatedLevels, getCurrentEstimatedLevel } from '@/lib/pharmacokinetics';
@@ -24,7 +24,7 @@ const PERIOD_TABS: PeriodTab[] = [
 ];
 
 export const EstimatedLevelsChart: React.FC = () => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { applications, loading } = useApplications();
   const [selectedPeriod, setSelectedPeriod] = useState<Period>('week');
 

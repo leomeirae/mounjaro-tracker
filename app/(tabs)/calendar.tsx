@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { MonthCalendar } from '@/components/calendar/MonthCalendar';
 import { DayEventsList } from '@/components/calendar/DayEventsList';
 import { useApplications } from '@/hooks/useApplications';
@@ -19,7 +19,7 @@ type CalendarEvent = {
 };
 
 export default function CalendarViewScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [refreshing, setRefreshing] = useState(false);
@@ -246,8 +246,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   todayButton: {
-    paddingVertical: 12,  // Mudança: 10 → 12px (Shotsy vertical padding)
-    paddingHorizontal: 20,  // Mudança: 16 → 20px (Shotsy horizontal padding)
+    paddingVertical: 12,  // Mudança: 10 → 12px (design system vertical padding)
+    paddingHorizontal: 20,  // Mudança: 16 → 20px (design system horizontal padding)
     borderRadius: 12,
     borderWidth: 1.5,
     alignItems: 'center',

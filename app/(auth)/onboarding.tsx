@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Alert, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-simple';
 import { Input } from '@/components/ui/input';
 import { useColors } from '@/constants/colors';
 import { supabase } from '@/lib/supabase';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { AppIcon, DeviceMobileIcon, ClockIcon, ResultsIcon, CaloriesIcon } from '@/components/ui/icons';
 
 interface WidgetsIntroScreenProps {
@@ -11,7 +11,7 @@ interface WidgetsIntroScreenProps {
 }
 
 export function WidgetsIntroScreen({ onNext, onBack }: WidgetsIntroScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <OnboardingScreenBase
@@ -23,7 +23,7 @@ export function WidgetsIntroScreen({ onNext, onBack }: WidgetsIntroScreenProps) 
       <View style={styles.content}>
         <AppIcon name="deviceMobile" size={80} color={colors.text} />
 
-        <ShotsyCard variant="elevated" style={styles.card}>
+        <Card variant="elevated" style={styles.card}>
           <View style={styles.feature}>
             <ClockIcon size="xl" color={colors.text} />
             <View style={styles.featureText}>
@@ -35,9 +35,9 @@ export function WidgetsIntroScreen({ onNext, onBack }: WidgetsIntroScreenProps) 
               </Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard variant="elevated" style={styles.card}>
+        <Card variant="elevated" style={styles.card}>
           <View style={styles.feature}>
             <ResultsIcon size="xl" color={colors.text} />
             <View style={styles.featureText}>
@@ -49,9 +49,9 @@ export function WidgetsIntroScreen({ onNext, onBack }: WidgetsIntroScreenProps) 
               </Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard variant="elevated" style={styles.card}>
+        <Card variant="elevated" style={styles.card}>
           <View style={styles.feature}>
             <CaloriesIcon size="xl" color={colors.text} />
             <View style={styles.featureText}>
@@ -63,7 +63,7 @@ export function WidgetsIntroScreen({ onNext, onBack }: WidgetsIntroScreenProps) 
               </Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
       </View>
     </OnboardingScreenBase>
   );

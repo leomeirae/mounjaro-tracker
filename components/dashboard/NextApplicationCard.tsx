@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useColors } from '@/constants/colors';
 import { useRouter } from 'expo-router';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button-simple';
 
 interface NextApplicationCardProps {
   daysUntil: number;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface CalendarDay {
   date: Date;
@@ -23,7 +23,7 @@ export const MonthCalendar: React.FC<MonthCalendarProps> = ({
   onSelectDate,
   events,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   // Gerar dias do calendário (incluindo dias do mês anterior/posterior)
   const generateCalendarDays = (): CalendarDay[] => {

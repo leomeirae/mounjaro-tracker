@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Alert, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useMedications } from '@/hooks/useMedications';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { MedicationType } from '@/lib/types';
 import * as Haptics from 'expo-haptics';
 
@@ -15,7 +15,7 @@ const MEDICATION_OPTIONS: { value: MedicationType; label: string }[] = [
 ];
 
 export default function AddMedicationScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const router = useRouter();
   const params = useLocalSearchParams();
   const editId = params.editId as string | undefined;

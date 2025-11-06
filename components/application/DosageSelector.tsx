@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface DosageSelectorProps {
   value: number | null;
@@ -10,7 +10,7 @@ interface DosageSelectorProps {
 const DOSAGES = [2.5, 5, 7.5, 10, 12.5, 15];
 
 export function DosageSelector({ value, onChange }: DosageSelectorProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <ScrollView

@@ -10,8 +10,8 @@ import {
   StyleProp,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyButton } from '@/components/ui/shotsy-button';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Button } from '@/components/ui/button-simple';
 import { Ionicons } from '@expo/vector-icons';
 
 interface OnboardingScreenBaseProps {
@@ -45,7 +45,7 @@ export function OnboardingScreenBase({
   titleStyle,
   subtitleStyle,
 }: OnboardingScreenBaseProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const insets = useSafeAreaInsets();
 
   return (
@@ -112,7 +112,7 @@ export function OnboardingScreenBase({
             },
           ]}
         >
-          <ShotsyButton
+          <Button
             title={nextButtonText}
             onPress={onNext}
             disabled={disableNext}

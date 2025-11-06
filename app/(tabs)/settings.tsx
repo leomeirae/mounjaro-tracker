@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Alert, Linking } from 'react-native';
 import { useAuth } from '@clerk/clerk-expo';
 import { router } from 'expo-router';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { UserProfile } from '@/components/settings/UserProfile';
 import { SettingsSection } from '@/components/settings/SettingsSection';
 import { SettingsRow } from '@/components/settings/SettingsRow';
@@ -20,7 +20,7 @@ import { PremiumGate } from '@/components/premium/PremiumGate';
 import * as Haptics from 'expo-haptics';
 
 export default function SettingsScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { signOut } = useAuth();
   const { profile } = useProfile();
   const { settings, updateSettings } = useSettings();

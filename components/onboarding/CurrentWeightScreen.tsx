@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
@@ -20,7 +20,7 @@ const DECIMALS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const UNITS = ['kg', 'lb'] as const;
 
 export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
 
   const [wholeNumber, setWholeNumber] = useState(75);
@@ -44,7 +44,7 @@ export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps
       contentContainerStyle={styles.screenContent}
     >
       <View style={styles.content}>
-        <ShotsyCard variant="elevated" style={styles.pickerCard}>
+        <Card variant="elevated" style={styles.pickerCard}>
           <Text style={[styles.inputLabel, { color: colors.textSecondary }]}>Peso atual</Text>
 
           <View style={styles.pickerContainer}>
@@ -114,15 +114,15 @@ export function CurrentWeightScreen({ onNext, onBack }: CurrentWeightScreenProps
               pointerEvents="none"
             />
           </View>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={styles.tipCard}>
+        <Card style={styles.tipCard}>
           <Text style={styles.tipEmoji}>💡</Text>
           <Text style={[styles.tipText, { color: colors.textSecondary }]}>
             Para resultados mais precisos, pese-se sempre no mesmo horário, de preferência pela
             manhã.
           </Text>
-        </ShotsyCard>
+        </Card>
       </View>
     </OnboardingScreenBase>
   );

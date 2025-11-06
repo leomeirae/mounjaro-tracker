@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Svg, { Circle, Ellipse, G, Rect } from 'react-native-svg';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import * as Haptics from 'expo-haptics';
 
 export interface BodyDiagramProps {
@@ -30,7 +30,7 @@ const INJECTION_SITES: InjectionSite[] = [
 ];
 
 export function BodyDiagram({ selectedSites, onSiteToggle, history = [] }: BodyDiagramProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   // Get suggested site based on rotation logic
   const getSuggestedSite = (): string | null => {
@@ -106,7 +106,7 @@ export function BodyDiagram({ selectedSites, onSiteToggle, history = [] }: BodyD
 
   return (
     <View style={styles.container}>
-      {/* SVG Body Diagram - Shotsy style: minimalist, clean */}
+      {/* SVG Body Diagram - design system style: minimalist, clean */}
       <View style={styles.diagramContainer}>
         <Svg width="280" height="320" viewBox="0 0 280 320">
           {/* Simple body silhouette - very subtle */}

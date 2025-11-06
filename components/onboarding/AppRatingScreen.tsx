@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Linking, Platform } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
-import { ShotsyButton } from '@/components/ui/shotsy-button';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button-simple';
 
 interface AppRatingScreenProps {
   onNext: () => void;
@@ -11,7 +11,7 @@ interface AppRatingScreenProps {
 }
 
 export function AppRatingScreen({ onNext, onBack }: AppRatingScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const handleRateNow = async () => {
     const appStoreUrl = Platform.select({
@@ -32,7 +32,7 @@ export function AppRatingScreen({ onNext, onBack }: AppRatingScreenProps) {
 
   return (
     <OnboardingScreenBase
-      title="Está gostando do Shotsy?"
+      title="Está gostando do Mounjaro Tracker?"
       subtitle="Sua avaliação nos ajuda a melhorar e alcançar mais pessoas"
       onNext={onNext}
       onBack={onBack}
@@ -42,15 +42,15 @@ export function AppRatingScreen({ onNext, onBack }: AppRatingScreenProps) {
       <View style={styles.content}>
         <Text style={styles.emoji}>⭐</Text>
 
-        <ShotsyCard variant="elevated" style={styles.messageCard}>
+        <Card variant="elevated" style={styles.messageCard}>
           <Text style={[styles.messageTitle, { color: colors.text }]}>
             Sua opinião é muito importante!
           </Text>
           <Text style={[styles.messageText, { color: colors.textSecondary }]}>
-            Se você está gostando do Shotsy, considere deixar uma avaliação na App Store.
+            Se você está gostando do Mounjaro Tracker, considere deixar uma avaliação na App Store.
             Isso nos ajuda tremendamente a continuar desenvolvendo e melhorando o app.
           </Text>
-        </ShotsyCard>
+        </Card>
 
         <View style={styles.starsContainer}>
           <Text style={styles.star}>⭐</Text>
@@ -60,13 +60,13 @@ export function AppRatingScreen({ onNext, onBack }: AppRatingScreenProps) {
           <Text style={styles.star}>⭐</Text>
         </View>
 
-        <ShotsyButton
+        <Button
           title="Avaliar agora"
           onPress={handleRateNow}
           variant="primary"
         />
 
-        <ShotsyCard style={styles.benefitsCard}>
+        <Card style={styles.benefitsCard}>
           <Text style={[styles.benefitsTitle, { color: colors.text }]}>
             Por que avaliar ajuda?
           </Text>
@@ -74,7 +74,7 @@ export function AppRatingScreen({ onNext, onBack }: AppRatingScreenProps) {
             <View style={styles.benefit}>
               <Text style={styles.benefitEmoji}>📱</Text>
               <Text style={[styles.benefitText, { color: colors.textSecondary }]}>
-                Mais pessoas descobrem o Shotsy
+                Mais pessoas descobrem o Mounjaro Tracker
               </Text>
             </View>
             <View style={styles.benefit}>
@@ -90,7 +90,7 @@ export function AppRatingScreen({ onNext, onBack }: AppRatingScreenProps) {
               </Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
       </View>
     </OnboardingScreenBase>
   );

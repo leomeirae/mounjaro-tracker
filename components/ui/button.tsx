@@ -1,88 +1,124 @@
-import { Pressable, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { useColors } from '@/constants/colors';
+import React from 'react';
+import { TouchableOpacity, Text, StyleSheet, ActivityIndicator, ViewStyle, TextStyle } from 'react-native';
+import { useTheme } from '@/lib/theme-context';
 
 interface ButtonProps {
-  label: string;
+  title: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary' | 'outline';
-  loading?: boolean;
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
+  loading?: boolean;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
 }
 
-export function Button({ 
-  label, 
-  onPress, 
+export function Button({
+  title,
+  onPress,
   variant = 'primary',
-  loading = false,
+  size = 'large',
   disabled = false,
+  loading = false,
+  style,
+  textStyle,
 }: ButtonProps) {
-  const colors = useColors();
-  const isDisabled = disabled || loading;
+  const { colors, currentAccent, effectiveMode } = useTheme();
+  const isDark = effectiveMode === 'dark';
 
-  const getButtonStyle = () => {
+  const getBackgroundColor = () => {
+    if (disabled) return isDark ? '#374151' : '#E5E7EB';
+
     switch (variant) {
       case 'primary':
-        return { backgroundColor: colors.primary };
+        return currentAccent;
       case 'secondary':
-        return { backgroundColor: colors.card };
+        return isDark ? colors.cardDark : colors.cardLight;
       case 'outline':
-        return { 
-          backgroundColor: 'transparent', 
-          borderWidth: 2, 
-          borderColor: colors.primary 
-        };
+      case 'ghost':
+        return 'transparent';
       default:
-        return { backgroundColor: colors.primary };
+        return currentAccent;
     }
   };
 
-  const getTextStyle = () => {
+  const getTextColor = () => {
+    if (disabled) return isDark ? '#6B7280' : '#9CA3AF';
+
     switch (variant) {
-      case 'outline':
-        return { color: colors.primary };
+      case 'primary':
+        return '#FFFFFF';
       case 'secondary':
-        return { color: colors.text };
+      case 'outline':
+      case 'ghost':
+        return currentAccent;
       default:
-        return { color: '#ffffff' };
+        return '#FFFFFF';
+    }
+  };
+
+  const getHeight = () => {
+    switch (size) {
+      case 'small':
+        return 40;
+      case 'medium':
+        return 48;
+      case 'large':
+        return 52;
+      default:
+        return 52;
     }
   };
 
   return (
-    <Pressable
-      onPress={onPress}
-      disabled={isDisabled}
-      style={({ pressed }) => [
+    <TouchableOpacity
+      style={[
         styles.button,
-        getButtonStyle(),
-        pressed && !isDisabled && styles.pressed,
-        isDisabled && styles.disabled,
+        {
+          backgroundColor: getBackgroundColor(),
+          height: getHeight(),
+          borderWidth: variant === 'outline' ? 2 : 0,
+          borderColor: variant === 'outline' ? currentAccent : 'transparent',
+        },
+        disabled && styles.disabled,
+        style,
       ]}
+      onPress={onPress}
+      disabled={disabled || loading}
+      activeOpacity={0.7}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'outline' ? colors.primary : '#ffffff'} />
+        <ActivityIndicator color={getTextColor()} />
       ) : (
-        <Text style={[styles.text, getTextStyle()]}>{label}</Text>
+        <Text
+          style={[
+            styles.text,
+            {
+              color: getTextColor(),
+              fontSize: size === 'small' ? 14 : size === 'medium' ? 15 : 16,
+              fontWeight: '600',
+            },
+            textStyle,
+          ]}
+        >
+          {title}
+        </Text>
       )}
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    height: 48,
-    borderRadius: 12,
-    alignItems: 'center',
+    borderRadius: 26,
     justifyContent: 'center',
-    paddingHorizontal: 24,
+    alignItems: 'center',
+    paddingHorizontal: 22,
   },
-  pressed: {
-    opacity: 0.8,
+  text: {
+    textAlign: 'center',
   },
   disabled: {
     opacity: 0.5,
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

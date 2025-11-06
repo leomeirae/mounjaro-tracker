@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { WeightIcon } from '@/components/ui/icons';
 
 interface ShotEvent {
@@ -32,7 +32,7 @@ export const DayEventsList: React.FC<DayEventsListProps> = ({
   selectedDate,
   events,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const router = useRouter();
 
   const formatDate = (date: Date): string => {
@@ -94,7 +94,7 @@ export const DayEventsList: React.FC<DayEventsListProps> = ({
       onPress={() => handleEventPress(event)}
       activeOpacity={0.7}
     >
-      <ShotsyCard style={styles.eventCard}>
+      <Card style={styles.eventCard}>
         <View style={styles.eventHeader}>
           <View style={styles.eventIconContainer}>
             <Text style={styles.eventIcon}>💉</Text>
@@ -123,7 +123,7 @@ export const DayEventsList: React.FC<DayEventsListProps> = ({
             </View>
           </View>
         </View>
-      </ShotsyCard>
+      </Card>
     </TouchableOpacity>
   );
 
@@ -139,7 +139,7 @@ export const DayEventsList: React.FC<DayEventsListProps> = ({
         onPress={() => handleEventPress(event)}
         activeOpacity={0.7}
       >
-        <ShotsyCard style={styles.eventCard}>
+        <Card style={styles.eventCard}>
           <View style={styles.eventHeader}>
             <View style={styles.eventIconContainer}>
             <WeightIcon size="md" color={colors.primary} />
@@ -182,7 +182,7 @@ export const DayEventsList: React.FC<DayEventsListProps> = ({
               </View>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
       </TouchableOpacity>
     );
   };

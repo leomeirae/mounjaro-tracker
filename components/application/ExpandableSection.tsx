@@ -5,7 +5,7 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface ExpandableSectionProps {
   title: string;
@@ -20,7 +20,7 @@ export function ExpandableSection({
   children,
   defaultExpanded = false
 }: ExpandableSectionProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const [expanded, setExpanded] = useState(defaultExpanded);
   const rotation = useSharedValue(defaultExpanded ? 180 : 0);
 

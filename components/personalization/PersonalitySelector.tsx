@@ -19,7 +19,7 @@ import {
   MOTIVATION_TYPES,
   NOTIFICATION_TONES,
 } from '@/lib/types/communication';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface PersonalitySelectorProps {
   onComplete?: () => void;
@@ -31,7 +31,7 @@ export const PersonalitySelector: React.FC<PersonalitySelectorProps> = ({
   showSkip = false,
 }) => {
   const { personality, updatePersonality, loading: personalityLoading } = usePersonality();
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const [selectedStyle, setSelectedStyle] = useState<CommunicationStyle>('friend');
   const [humorLevel, setHumorLevel] = useState(3);
@@ -128,7 +128,7 @@ export const PersonalitySelector: React.FC<PersonalitySelectorProps> = ({
       <View style={styles.header}>
         <Text style={styles.title}>Communication Style</Text>
         <Text style={styles.subtitle}>
-          Customize how Shotsy talks to you
+          Customize how Mounjaro Tracker talks to you
         </Text>
       </View>
 
@@ -347,7 +347,7 @@ export const PersonalitySelector: React.FC<PersonalitySelectorProps> = ({
       <View style={styles.infoBox}>
         <Text style={styles.infoIcon}>💡</Text>
         <Text style={styles.infoText}>
-          These preferences affect how Shotsy communicates throughout the app, including insights, notifications, and celebrations. You can change them anytime in settings.
+          These preferences affect how Mounjaro Tracker communicates throughout the app, including insights, notifications, and celebrations. You can change them anytime in settings.
         </Text>
       </View>
     </ScrollView>

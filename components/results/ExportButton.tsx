@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { ShareIcon, FileTextIcon, TableIcon } from '@/components/ui/icons';
 import { useTheme } from '@/lib/theme-context';
 
@@ -41,7 +41,7 @@ export const ExportButton: React.FC<ExportButtonProps> = ({
   applications,
   profile,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
   const [exporting, setExporting] = useState(false);

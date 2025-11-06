@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import { Ionicons } from '@expo/vector-icons';
 
 interface HealthDisclaimerScreenProps {
@@ -12,7 +12,7 @@ interface HealthDisclaimerScreenProps {
 }
 
 export function HealthDisclaimerScreen({ onNext, onBack }: HealthDisclaimerScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [accepted, setAccepted] = useState(false);
 
@@ -26,7 +26,7 @@ export function HealthDisclaimerScreen({ onNext, onBack }: HealthDisclaimerScree
       nextButtonText="Prosseguir"
     >
       <View style={styles.content}>
-        <ShotsyCard variant="elevated" style={[styles.disclaimerCard, { borderLeftColor: currentAccent }]}>
+        <Card variant="elevated" style={[styles.disclaimerCard, { borderLeftColor: currentAccent }]}>
           <Text style={styles.emoji}>⚠️</Text>
 
           <Text style={[styles.disclaimerTitle, { color: colors.text }]}>
@@ -34,7 +34,7 @@ export function HealthDisclaimerScreen({ onNext, onBack }: HealthDisclaimerScree
           </Text>
 
           <Text style={[styles.disclaimerText, { color: colors.textSecondary }]}>
-            O Shotsy não substitui orientação médica profissional, diagnóstico ou tratamento.
+            O Mounjaro Tracker não substitui orientação médica profissional, diagnóstico ou tratamento.
             Sempre consulte seu médico ou profissional de saúde qualificado sobre quaisquer
             dúvidas relacionadas a condições médicas ou tratamentos.
           </Text>
@@ -59,7 +59,7 @@ export function HealthDisclaimerScreen({ onNext, onBack }: HealthDisclaimerScree
               </Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
 
         <TouchableOpacity
           style={styles.checkbox}

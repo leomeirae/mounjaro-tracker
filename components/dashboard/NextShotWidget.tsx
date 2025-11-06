@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
-import { ShotsyCircularProgress } from '@/components/ui/shotsy-circular-progress';
-import { ShotsyButton } from '@/components/ui/shotsy-button';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
+import { CircularProgress } from '@/components/ui/circular-progress';
+import { Button } from '@/components/ui/button-simple';
 import { router } from 'expo-router';
 
 interface NextShotWidgetProps {
@@ -28,7 +28,7 @@ export function NextShotWidget({
   lastShotDate,
   frequency = 'weekly',
 }: NextShotWidgetProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   // Calcular estado do widget
   const getWidgetState = (): WidgetState => {
@@ -158,8 +158,8 @@ export function NextShotWidget({
     <View style={styles.container}>
       <Text style={[styles.title, { color: colors.text }]}>Próxima Injeção</Text>
 
-      <ShotsyCard style={styles.card}>
-        <ShotsyCircularProgress size={240} progress={state.progress}>
+      <Card style={styles.card}>
+        <CircularProgress size={240} progress={state.progress}>
           <View style={styles.content}>
             {/* Emoji indicator */}
             <Text style={styles.emoji}>{state.emoji}</Text>
@@ -172,7 +172,7 @@ export function NextShotWidget({
             </Text>
 
             {state.buttonText && state.onButtonPress && (
-              <ShotsyButton
+              <Button
                 title={state.buttonText}
                 onPress={state.onButtonPress}
                 size="medium"
@@ -180,8 +180,8 @@ export function NextShotWidget({
               />
             )}
           </View>
-        </ShotsyCircularProgress>
-      </ShotsyCard>
+        </CircularProgress>
+      </Card>
     </View>
   );
 }

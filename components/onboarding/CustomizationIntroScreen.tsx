@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 
 interface CustomizationIntroScreenProps {
   onNext: () => void;
@@ -11,7 +11,7 @@ interface CustomizationIntroScreenProps {
 }
 
 export function CustomizationIntroScreen({ onNext, onBack }: CustomizationIntroScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
 
   return (
@@ -23,7 +23,7 @@ export function CustomizationIntroScreen({ onNext, onBack }: CustomizationIntroS
       contentContainerStyle={styles.screenContent}
     >
       <View style={styles.content}>
-        <ShotsyCard variant="elevated" style={styles.featureCard}>
+        <Card variant="elevated" style={styles.featureCard}>
           <View style={styles.featureRow}>
             <Text style={styles.featureEmoji}>🌈</Text>
             <View style={styles.featureCopy}>
@@ -45,9 +45,9 @@ export function CustomizationIntroScreen({ onNext, onBack }: CustomizationIntroS
               </Text>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={styles.paletteCard}>
+        <Card style={styles.paletteCard}>
           <Text style={[styles.paletteLabel, { color: colors.textSecondary }]}>
             Paletas disponíveis
           </Text>
@@ -56,7 +56,7 @@ export function CustomizationIntroScreen({ onNext, onBack }: CustomizationIntroS
               <View key={color} style={[styles.swatch, { backgroundColor: color }]} />
             ))}
           </View>
-        </ShotsyCard>
+        </Card>
       </View>
     </OnboardingScreenBase>
   );

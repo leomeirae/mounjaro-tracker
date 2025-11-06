@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import Slider from '@react-native-community/slider';
 import * as Haptics from 'expo-haptics';
 
@@ -38,7 +38,7 @@ export function TargetWeightScreen({
   startingWeight = 0,
   height = 170,
 }: TargetWeightScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   
   // Calcular range inteligente baseado no peso atual
@@ -70,7 +70,7 @@ export function TargetWeightScreen({
     >
       <View style={styles.content}>
         {/* Main Slider Card */}
-        <ShotsyCard variant="elevated" style={styles.sliderCard}>
+        <Card variant="elevated" style={styles.sliderCard}>
           {/* Big Weight Display */}
           <Text style={[styles.weightValue, { color: colors.text }]}>
             {targetWeight.toFixed(1)}{weightUnit}
@@ -164,10 +164,10 @@ export function TargetWeightScreen({
               </View>
             </View>
           </View>
-        </ShotsyCard>
+        </Card>
 
         {/* Progress Summary */}
-        <ShotsyCard style={styles.summaryCard}>
+        <Card style={styles.summaryCard}>
           <View style={styles.summaryRow}>
             <Text style={[styles.summaryLabel, { color: colors.textSecondary }]}>
               Perder:
@@ -184,7 +184,7 @@ export function TargetWeightScreen({
               {currentWeight.toFixed(1)} {weightUnit}
             </Text>
           </View>
-        </ShotsyCard>
+        </Card>
 
       </View>
     </OnboardingScreenBase>

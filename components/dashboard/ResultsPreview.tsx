@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { router } from 'expo-router';
 import { ArrowRightIcon } from '@/components/ui/icons';
 
@@ -19,7 +19,7 @@ interface ResultsPreviewProps {
 }
 
 export function ResultsPreview({ metrics }: ResultsPreviewProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const getBMICategory = (bmi: number): string => {
     if (bmi < 18.5) return 'Abaixo do peso';
@@ -47,7 +47,7 @@ export function ResultsPreview({ metrics }: ResultsPreviewProps) {
       <View style={styles.grid}>
         {/* Row 1 */}
         <View style={styles.row}>
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>
               MUDANÇA TOTAL
             </Text>
@@ -57,9 +57,9 @@ export function ResultsPreview({ metrics }: ResultsPreviewProps) {
             <Text style={[styles.subtitle, { color: colors.textMuted }]}>
               {Math.abs((metrics.totalChange / (metrics.currentWeight - metrics.totalChange)) * 100).toFixed(1)}%
             </Text>
-          </ShotsyCard>
+          </Card>
 
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>
               IMC ATUAL
             </Text>
@@ -69,21 +69,21 @@ export function ResultsPreview({ metrics }: ResultsPreviewProps) {
             <Text style={[styles.subtitle, { color: colors.textMuted }]}>
               {getBMICategory(metrics.currentBMI)}
             </Text>
-          </ShotsyCard>
+          </Card>
 
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>
               PESO ATUAL
             </Text>
             <Text style={[styles.value, { color: colors.text }]}>
               {metrics.currentWeight.toFixed(1)} kg
             </Text>
-          </ShotsyCard>
+          </Card>
         </View>
 
         {/* Row 2 */}
         <View style={styles.row}>
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>
               PROGRESSO
             </Text>
@@ -93,9 +93,9 @@ export function ResultsPreview({ metrics }: ResultsPreviewProps) {
             <Text style={[styles.subtitle, { color: colors.textMuted }]}>
               até a meta
             </Text>
-          </ShotsyCard>
+          </Card>
 
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>
               MÉDIA SEMANAL
             </Text>
@@ -105,9 +105,9 @@ export function ResultsPreview({ metrics }: ResultsPreviewProps) {
             <Text style={[styles.subtitle, { color: colors.textMuted }]}>
               por semana
             </Text>
-          </ShotsyCard>
+          </Card>
 
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={[styles.label, { color: colors.textSecondary }]}>
               PARA A META
             </Text>
@@ -117,7 +117,7 @@ export function ResultsPreview({ metrics }: ResultsPreviewProps) {
             <Text style={[styles.subtitle, { color: colors.textMuted }]}>
               restantes
             </Text>
-          </ShotsyCard>
+          </Card>
         </View>
       </View>
     </View>

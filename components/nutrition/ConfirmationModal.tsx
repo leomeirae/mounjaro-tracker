@@ -1,6 +1,6 @@
 import { Modal, View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { Button } from '@/components/ui/button';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Button } from '@/components/ui/button-simple';
 import { X, Check, Pencil } from 'phosphor-react-native';
 import { NutritionAnalysis } from '@/lib/gemini';
 
@@ -19,7 +19,7 @@ export function ConfirmationModal({
   onCancel,
   loading = false,
 }: ConfirmationModalProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const styles = getStyles(colors);
 
   if (!analysis) return null;

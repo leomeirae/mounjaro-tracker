@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { router } from 'expo-router';
 
 interface TodaySectionProps {
@@ -19,7 +19,7 @@ export function TodaySection({
   todaySideEffects,
   todayNotes,
 }: TodaySectionProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const handleWeightPress = () => {
     router.push('/(tabs)/add-weight');
@@ -53,7 +53,7 @@ export function TodaySection({
           onPress={handleWeightPress}
           activeOpacity={0.7}
         >
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.emoji}>⚖️</Text>
             <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
               PESO
@@ -67,7 +67,7 @@ export function TodaySection({
                 Toque para{'\n'}adicionar
               </Text>
             )}
-          </ShotsyCard>
+          </Card>
         </TouchableOpacity>
 
         {/* Card de Calorias */}
@@ -76,7 +76,7 @@ export function TodaySection({
           onPress={handleCaloriesPress}
           activeOpacity={0.7}
         >
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.emoji}>🍖</Text>
             <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
               CALORIAS
@@ -90,7 +90,7 @@ export function TodaySection({
                 Toque para{'\n'}adicionar
               </Text>
             )}
-          </ShotsyCard>
+          </Card>
         </TouchableOpacity>
 
         {/* Card de Proteína */}
@@ -99,7 +99,7 @@ export function TodaySection({
           onPress={handleProteinPress}
           activeOpacity={0.7}
         >
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.emoji}>🥩</Text>
             <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
               PROTEÍNA
@@ -113,7 +113,7 @@ export function TodaySection({
                 Toque para{'\n'}adicionar
               </Text>
             )}
-          </ShotsyCard>
+          </Card>
         </TouchableOpacity>
 
         {/* Card de Efeitos Colaterais */}
@@ -122,7 +122,7 @@ export function TodaySection({
           onPress={handleSideEffectsPress}
           activeOpacity={0.7}
         >
-          <ShotsyCard style={styles.card}>
+          <Card style={styles.card}>
             <Text style={styles.emoji}>😷</Text>
             <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
               EFEITOS
@@ -136,7 +136,7 @@ export function TodaySection({
                 Toque para{'\n'}adicionar
               </Text>
             )}
-          </ShotsyCard>
+          </Card>
         </TouchableOpacity>
       </View>
 
@@ -146,7 +146,7 @@ export function TodaySection({
         activeOpacity={0.7}
         style={styles.notesContainer}
       >
-        <ShotsyCard style={styles.fullCard}>
+        <Card style={styles.fullCard}>
           <View style={styles.fullCardHeader}>
             <Text style={styles.emoji}>📝</Text>
             <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
@@ -165,7 +165,7 @@ export function TodaySection({
               Toque para adicionar suas notas do dia
             </Text>
           )}
-        </ShotsyCard>
+        </Card>
       </TouchableOpacity>
     </View>
   );

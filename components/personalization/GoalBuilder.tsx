@@ -16,7 +16,7 @@ import {
   GOAL_TEMPLATES,
   createMilestones,
 } from '@/lib/types/goals';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface GoalBuilderProps {
   onComplete?: () => void;
@@ -28,7 +28,7 @@ export const GoalBuilder: React.FC<GoalBuilderProps> = ({
   showSkip = false,
 }) => {
   const { createGoal } = useGoals();
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const [selectedType, setSelectedType] = useState<GoalType>('weight_loss');
   const [title, setTitle] = useState('');

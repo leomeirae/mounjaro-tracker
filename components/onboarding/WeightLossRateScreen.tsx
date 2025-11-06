@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import { Ionicons } from '@expo/vector-icons';
 
 interface WeightLossRateScreenProps {
@@ -19,7 +19,7 @@ const rates = [
 ];
 
 export function WeightLossRateScreen({ onNext, onBack, weightUnit = 'kg' }: WeightLossRateScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [selectedIndex, setSelectedIndex] = useState(1);
 
@@ -37,14 +37,14 @@ export function WeightLossRateScreen({ onNext, onBack, weightUnit = 'kg' }: Weig
       onBack={onBack}
     >
       <View style={styles.content}>
-        <ShotsyCard variant="elevated" style={styles.rateCard}>
+        <Card variant="elevated" style={styles.rateCard}>
           <Text style={[styles.rateLabel, { color: colors.textSecondary }]}>
             {currentRate.label}
           </Text>
           <Text style={[styles.rateValue, { color: currentAccent }]}>
             {weightUnit === 'kg' ? currentRate.description : currentRate.lbDescription}
           </Text>
-        </ShotsyCard>
+        </Card>
 
         <View style={styles.optionsContainer}>
           {rates.map((rate, index) => (
@@ -74,13 +74,13 @@ export function WeightLossRateScreen({ onNext, onBack, weightUnit = 'kg' }: Weig
           ))}
         </View>
 
-        <ShotsyCard style={styles.infoCard}>
+        <Card style={styles.infoCard}>
           <Text style={styles.infoEmoji}>💡</Text>
           <Text style={[styles.infoText, { color: colors.textSecondary }]}>
             Estudos mostram que uma perda de peso gradual e consistente é mais sustentável
             a longo prazo. Lembre-se: cada pessoa responde de forma diferente ao tratamento.
           </Text>
-        </ShotsyCard>
+        </Card>
 
         <Text style={styles.emoji}>⚖️</Text>
       </View>

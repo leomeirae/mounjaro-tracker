@@ -12,7 +12,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { Ionicons } from '@expo/vector-icons';
 import { trackEvent } from '@/lib/analytics';
 import { useFeatureFlag } from '@/lib/feature-flags';
@@ -27,8 +27,8 @@ interface FAQItem {
 const FAQ_ITEMS: FAQItem[] = [
   {
     id: 1,
-    question: 'Como posso aproveitar ao máximo o uso do Shotsy?',
-    answer: 'Para aproveitar ao máximo o Shotsy, recomendamos:\n\n• Registre todas as suas aplicações regularmente\n• Acompanhe seu peso diariamente\n• Use o calendário para visualizar seu histórico\n• Configure lembretes para não esquecer suas doses\n• Explore os gráficos para entender seu progresso',
+    question: 'Como posso aproveitar ao máximo o uso do Mounjaro Tracker?',
+    answer: 'Para aproveitar ao máximo o Mounjaro Tracker, recomendamos:\n\n• Registre todas as suas aplicações regularmente\n• Acompanhe seu peso diariamente\n• Use o calendário para visualizar seu histórico\n• Configure lembretes para não esquecer suas doses\n• Explore os gráficos para entender seu progresso',
     slug: 'como-aproveitar',
   },
   {
@@ -100,7 +100,7 @@ const FAQ_ITEMS: FAQItem[] = [
 ];
 
 export default function FAQScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const router = useRouter();
   const useFAQ = useFeatureFlag('FF_FAQ');
   const [searchQuery, setSearchQuery] = useState('');

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
 
 type Period = 'week' | 'month' | '90days' | 'all';
@@ -12,7 +12,7 @@ interface MedicationLevelChartProps {
 }
 
 export function MedicationLevelChart({}: MedicationLevelChartProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const { width } = useWindowDimensions(); // ✅ Responsivo a rotação do dispositivo
   const [selectedPeriod, setSelectedPeriod] = useState<Period>('month');

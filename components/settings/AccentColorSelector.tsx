@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useTheme } from '@/lib/theme-context';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ACCENT_COLORS, type AccentColor } from '@/constants/ShotsyThemes';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { ACCENT_COLORS, type AccentColor } from '@/constants/AppThemes';
 
 export const AccentColorSelector: React.FC = () => {
   const { setAccentColor, currentAccent } = useTheme();
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const accentOptions: Array<{ id: AccentColor; label: string; color: string }> = [
     { id: 'yellow', label: 'Amarelo', color: ACCENT_COLORS.yellow },

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
 import {
   AppIcon, HeartIcon, WeightIcon, InjectionsIcon, SparkleIcon, StethoscopeIcon, CheckCircleIcon
@@ -21,7 +21,7 @@ const motivations = [
 ];
 
 export function MotivationScreen({ onNext, onBack }: MotivationScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [selected, setSelected] = useState<string | null>(null);
 

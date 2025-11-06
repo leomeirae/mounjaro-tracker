@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface SettingsSectionProps {
   title: string;
@@ -11,7 +11,7 @@ export const SettingsSection: React.FC<SettingsSectionProps> = ({
   title,
   children,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <View style={styles.container}>

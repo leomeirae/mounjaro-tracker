@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 
 interface StatItemProps {
   label: string;
@@ -10,7 +10,7 @@ interface StatItemProps {
 }
 
 const StatItem: React.FC<StatItemProps> = ({ label, value, subtitle }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <View style={[styles.statItem, { borderBottomColor: `${colors.border}33` }]}>
@@ -48,7 +48,7 @@ export const DetailedStats: React.FC<DetailedStatsProps> = ({
   currentDose,
   nextTitration,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('pt-BR', {
@@ -58,7 +58,7 @@ export const DetailedStats: React.FC<DetailedStatsProps> = ({
   };
 
   return (
-    <ShotsyCard style={styles.card}>
+    <Card style={styles.card}>
       <Text style={[styles.title, { color: colors.text }]}>Estatísticas Detalhadas</Text>
 
       <View style={styles.grid}>
@@ -98,7 +98,7 @@ export const DetailedStats: React.FC<DetailedStatsProps> = ({
           {nextTitration}
         </Text>
       </View>
-    </ShotsyCard>
+    </Card>
   );
 };
 

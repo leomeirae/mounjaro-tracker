@@ -13,7 +13,7 @@ import {
   FlatList,
 } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useApplications } from '@/hooks/useApplications';
 import { useProfile } from '@/hooks/useProfile';
 import { useMedications } from '@/hooks/useMedications';
@@ -71,7 +71,7 @@ const DOSAGES = [
 ];
 
 export default function AddApplicationScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const params = useLocalSearchParams();
   const isEditMode = !!params.editId;
 
@@ -771,7 +771,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   dosageTag: {
-    paddingHorizontal: 8,  // Mudança: 12 → 8px (Shotsy badge padding)
+    paddingHorizontal: 8,  // Mudança: 12 → 8px (design system badge padding)
     paddingVertical: 6,
     borderRadius: 16,
   },

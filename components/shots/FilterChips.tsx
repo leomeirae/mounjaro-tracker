@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface FilterChipsProps {
   filters: string[];
@@ -13,7 +13,7 @@ export const FilterChips: React.FC<FilterChipsProps> = ({
   selectedFilter,
   onFilterChange,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <ScrollView

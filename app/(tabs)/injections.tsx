@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { ShotCard, Shot } from '@/components/shots/ShotCard';
 import { FilterChips } from '@/components/shots/FilterChips';
 import { ShotsStats } from '@/components/shots/ShotsStats';
@@ -28,7 +28,7 @@ const FILTERS = [
 ];
 
 export default function ShotsScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const [selectedFilter, setSelectedFilter] = useState('Todos');
   const [refreshing, setRefreshing] = useState(false);
   
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
   emptyIcon: {
-    fontSize: 72,  // Mudança: 80 → 72px (Shotsy icon size standard)
+    fontSize: 72,  // Mudança: 80 → 72px (design system icon size standard)
     marginBottom: 24,
   },
   emptyTitle: {

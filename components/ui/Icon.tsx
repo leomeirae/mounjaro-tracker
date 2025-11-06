@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icons, IconName } from '@/constants/icons';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface IconProps {
   name: IconName;
@@ -15,7 +15,7 @@ export const Icon: React.FC<IconProps> = ({
   color,
   weight = 'regular'
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const IconComponent = Icons[name];
 
   if (!IconComponent) {

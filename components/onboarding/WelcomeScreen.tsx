@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions, TouchableOpacity, Image, Linking } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyButton } from '@/components/ui/shotsy-button';
+import { Button } from '@/components/ui/button-simple';
 import { trackEvent } from '@/lib/analytics';
 
 interface WelcomeScreenProps {
@@ -11,7 +11,7 @@ interface WelcomeScreenProps {
 
 const { width } = Dimensions.get('window');
 
-// Slides do carrossel - 4 imagens do Shotsy
+// Slides do carrossel - 4 imagens do design system
 const slides = [
   {
     id: '1',
@@ -44,7 +44,7 @@ const slides = [
 ];
 
 export function WelcomeScreen({ onNext }: WelcomeScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
@@ -147,7 +147,7 @@ export function WelcomeScreen({ onNext }: WelcomeScreenProps) {
 
         {/* Botão */}
         <View style={styles.buttonContainer}>
-          <ShotsyButton
+          <Button
             title={currentIndex === slides.length - 1 ? 'Começar' : 'Próximo'}
             onPress={handleNext}
           />

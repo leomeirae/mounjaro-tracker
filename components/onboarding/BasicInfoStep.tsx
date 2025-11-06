@@ -13,14 +13,14 @@ import {
 } from 'react-native';
 import { useUser } from '@clerk/clerk-expo';
 import { supabase } from '@/lib/supabase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 
 interface BasicInfoStepProps {
   onComplete: () => void;
 }
 
 export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({ onComplete }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { user } = useUser();
 
   const [name, setName] = useState(user?.fullName || user?.firstName || '');
@@ -117,7 +117,7 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({ onComplete }) => {
         <View style={styles.welcomeBox}>
           <Text style={styles.emoji}>👋</Text>
           <Text style={styles.welcomeText}>
-            Let's personalize Shotsy for you!
+            Let's personalize design system for you!
           </Text>
         </View>
 

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { User, Robot } from 'phosphor-react-native';
 
 export interface ChatMessageProps {
@@ -9,7 +9,7 @@ export interface ChatMessageProps {
 }
 
 export function ChatMessage({ role, content, timestamp }: ChatMessageProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const styles = getStyles(colors);
 
   const isUser = role === 'user';

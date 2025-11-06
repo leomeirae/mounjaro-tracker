@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 import { router } from 'expo-router';
 
 interface ShotHistoryData {
@@ -15,7 +15,7 @@ interface ShotHistoryCardsProps {
 }
 
 export function ShotHistoryCards({ data }: ShotHistoryCardsProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
 
   return (
     <View style={styles.container}>
@@ -29,7 +29,7 @@ export function ShotHistoryCards({ data }: ShotHistoryCardsProps) {
       </View>
 
       <View style={styles.cards}>
-        <ShotsyCard style={styles.card}>
+        <Card style={styles.card}>
           <Text style={[styles.cardIcon, { color: colors.textSecondary }]}>💉</Text>
           <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
             Injeções tomadas
@@ -37,9 +37,9 @@ export function ShotHistoryCards({ data }: ShotHistoryCardsProps) {
           <Text style={[styles.cardValue, { color: colors.text }]}>
             {data.totalShots}
           </Text>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={styles.card}>
+        <Card style={styles.card}>
           <Text style={[styles.cardIcon, { color: colors.textSecondary }]}>💊</Text>
           <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
             Última dose
@@ -47,9 +47,9 @@ export function ShotHistoryCards({ data }: ShotHistoryCardsProps) {
           <Text style={[styles.cardValue, { color: colors.text }]}>
             {data.lastDose ? `${data.lastDose}mg` : '--'}
           </Text>
-        </ShotsyCard>
+        </Card>
 
-        <ShotsyCard style={styles.card}>
+        <Card style={styles.card}>
           <Text style={[styles.cardIcon, { color: colors.textSecondary }]}>📈</Text>
           <Text style={[styles.cardLabel, { color: colors.textSecondary }]}>
             Nível Est.
@@ -57,7 +57,7 @@ export function ShotHistoryCards({ data }: ShotHistoryCardsProps) {
           <Text style={[styles.cardValue, { color: colors.text }]}>
             {data.estimatedLevel ? `${data.estimatedLevel}mg` : '--'}
           </Text>
-        </ShotsyCard>
+        </Card>
       </View>
     </View>
   );

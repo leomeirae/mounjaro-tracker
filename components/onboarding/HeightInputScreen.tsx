@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { OnboardingScreenBase } from './OnboardingScreenBase';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { useTheme } from '@/lib/theme-context';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { Card } from '@/components/ui/card';
 import { Picker } from '@react-native-picker/picker';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
@@ -18,7 +18,7 @@ const HEIGHT_RANGE_FT = Array.from({ length: 5 }, (_, i) => i + 4); // 4-8 ft
 const HEIGHT_RANGE_IN = Array.from({ length: 12 }, (_, i) => i); // 0-11 inches
 
 export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { currentAccent } = useTheme();
   const [unit, setUnit] = useState<'cm' | 'ft'>('cm');
   const [heightCm, setHeightCm] = useState(175);
@@ -95,7 +95,7 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
           </TouchableOpacity>
         </View>
 
-        <ShotsyCard variant="elevated" style={styles.pickerCard}>
+        <Card variant="elevated" style={styles.pickerCard}>
           <View style={styles.pickerContainer}>
             <LinearGradient
               colors={[colors.background, 'transparent']}
@@ -145,7 +145,7 @@ export function HeightInputScreen({ onNext, onBack }: HeightInputScreenProps) {
               pointerEvents="none"
             />
           </View>
-        </ShotsyCard>
+        </Card>
       </View>
     </OnboardingScreenBase>
   );

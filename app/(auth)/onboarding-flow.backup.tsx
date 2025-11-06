@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
+import { useThemeColors } from '@/hooks/useThemeColors';
 import { OnboardingProgressBar } from '@/components/onboarding/OnboardingProgressBar';
 
 // Import all screens
@@ -64,7 +64,7 @@ interface OnboardingData {
 }
 
 export default function OnboardingFlowScreen() {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const router = useRouter();
   const [currentScreen, setCurrentScreen] = useState(0);
   const [onboardingData, setOnboardingData] = useState<OnboardingData>({});

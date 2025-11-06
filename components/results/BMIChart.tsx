@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Card } from '@/components/ui/card';
 
 interface BMIDataPoint {
   date: Date;
@@ -15,7 +15,7 @@ interface BMIChartProps {
 }
 
 export const BMIChart: React.FC<BMIChartProps> = ({ data, periodFilter }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { width } = useWindowDimensions();
   const [selectedPoint, setSelectedPoint] = useState<{ index: number; value: number; date: Date } | null>(null);
 
@@ -64,7 +64,7 @@ export const BMIChart: React.FC<BMIChartProps> = ({ data, periodFilter }) => {
 
   if (!hasData) {
     return (
-      <ShotsyCard style={styles.card}>
+      <Card style={styles.card}>
         <View style={styles.header}>
           <Text style={[styles.title, { color: colors.text }]}>Evolução de IMC</Text>
         </View>
@@ -73,7 +73,7 @@ export const BMIChart: React.FC<BMIChartProps> = ({ data, periodFilter }) => {
             Registre seus pesos para visualizar o gráfico de IMC.
           </Text>
         </View>
-      </ShotsyCard>
+      </Card>
     );
   }
 
@@ -92,7 +92,7 @@ export const BMIChart: React.FC<BMIChartProps> = ({ data, periodFilter }) => {
   };
 
   return (
-    <ShotsyCard style={styles.card}>
+    <Card style={styles.card}>
       <View style={styles.header}>
         <View>
           <Text style={[styles.title, { color: colors.text }]}>Evolução de IMC</Text>
@@ -174,7 +174,7 @@ export const BMIChart: React.FC<BMIChartProps> = ({ data, periodFilter }) => {
           </Text>
         </View>
       </View>
-    </ShotsyCard>
+    </Card>
   );
 };
 

@@ -10,9 +10,9 @@ import {
   Alert,
   Platform,
 } from 'react-native';
-import { useShotsyColors } from '@/hooks/useShotsyColors';
-import { ShotsyButton } from '@/components/ui/shotsy-button';
-import { ShotsyCard } from '@/components/ui/shotsy-card';
+import { useThemeColors } from '@/hooks/useThemeColors';
+import { Button } from '@/components/ui/button-simple';
+import { Card } from '@/components/ui/card';
 import { useProfile, UserProfile } from '@/hooks/useProfile';
 import * as Haptics from 'expo-haptics';
 
@@ -27,7 +27,7 @@ export const PersonalInfoEditor: React.FC<PersonalInfoEditorProps> = ({
   onClose,
   onSave,
 }) => {
-  const colors = useShotsyColors();
+  const colors = useThemeColors();
   const { profile, updateProfile } = useProfile();
   const [loading, setLoading] = useState(false);
 
@@ -162,7 +162,7 @@ export const PersonalInfoEditor: React.FC<PersonalInfoEditorProps> = ({
 
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
           {/* Nome */}
-          <ShotsyCard style={styles.section}>
+          <Card style={styles.section}>
             <Text style={[styles.label, { color: colors.text }]}>Nome *</Text>
             <TextInput
               style={[styles.input, { color: colors.text, borderColor: colors.border }]}
@@ -172,10 +172,10 @@ export const PersonalInfoEditor: React.FC<PersonalInfoEditorProps> = ({
               placeholderTextColor={colors.textSecondary}
               autoCapitalize="words"
             />
-          </ShotsyCard>
+          </Card>
 
           {/* Altura */}
-          <ShotsyCard style={styles.section}>
+          <Card style={styles.section}>
             <Text style={[styles.label, { color: colors.text }]}>Altura (metros)</Text>
             <TextInput
               style={[styles.input, { color: colors.text, borderColor: colors.border }]}
@@ -188,10 +188,10 @@ export const PersonalInfoEditor: React.FC<PersonalInfoEditorProps> = ({
             <Text style={[styles.hint, { color: colors.textSecondary }]}>
               Entre 1.0 e 2.5 metros
             </Text>
-          </ShotsyCard>
+          </Card>
 
           {/* Pesos */}
-          <ShotsyCard style={styles.section}>
+          <Card style={styles.section}>
             <Text style={[styles.label, { color: colors.text }]}>Peso Inicial (kg)</Text>
             <TextInput
               style={[styles.input, { color: colors.text, borderColor: colors.border }]}
@@ -213,10 +213,10 @@ export const PersonalInfoEditor: React.FC<PersonalInfoEditorProps> = ({
               placeholderTextColor={colors.textSecondary}
               keyboardType="decimal-pad"
             />
-          </ShotsyCard>
+          </Card>
 
           {/* Medicação */}
-          <ShotsyCard style={styles.section}>
+          <Card style={styles.section}>
             <Text style={[styles.label, { color: colors.text }]}>Medicamento</Text>
             <TextInput
               style={[styles.input, { color: colors.text, borderColor: colors.border }]}
@@ -236,20 +236,20 @@ export const PersonalInfoEditor: React.FC<PersonalInfoEditorProps> = ({
               placeholderTextColor={colors.textSecondary}
               keyboardType="decimal-pad"
             />
-          </ShotsyCard>
+          </Card>
 
           {/* Frequência */}
-          <ShotsyCard style={styles.section}>
+          <Card style={styles.section}>
             <Text style={[styles.label, { color: colors.text }]}>Frequência das Injeções</Text>
             <View style={styles.frequencyContainer}>
               <FrequencyButton value="daily" label="Diária" />
               <FrequencyButton value="weekly" label="Semanal" />
               <FrequencyButton value="biweekly" label="Quinzenal" />
             </View>
-          </ShotsyCard>
+          </Card>
 
           {/* Save Button */}
-          <ShotsyButton
+          <Button
             title={loading ? 'Salvando...' : 'Salvar Alterações'}
             onPress={handleSave}
             loading={loading}
